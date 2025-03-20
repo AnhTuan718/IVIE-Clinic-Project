@@ -51,17 +51,19 @@ public class NavigationActivity extends AppCompatActivity {
             return true;
         });
 
-        // Xử lý intent từ LoginActivity để chọn tab
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("SELECTED_TAB")) {
-            int selectedTab = intent.getIntExtra("SELECTED_TAB", R.id.nav_home);
-            bottomNavigation.setSelectedItemId(selectedTab);
-        } else if (savedInstanceState == null) {
-            // Mặc định hiển thị TrangChuFragment khi mở ứng dụng
+        // Luôn hiển thị TrangChuFragment khi khởi động lần đầu
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new TrangChuFragment())
                     .commit();
             bottomNavigation.setSelectedItemId(R.id.nav_home);
+        }
+
+        // Xử lý intent từ LoginActivity để chọn tab (sau khi đăng nhập)
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("SELECTED_TAB")) {
+            int selectedTab = intent.getIntExtra("SELECTED_TAB", R.id.nav_home);
+            bottomNavigation.setSelectedItemId(selectedTab);
         }
     }
 
@@ -81,6 +83,10 @@ public class NavigationActivity extends AppCompatActivity {
         if (bottomNavigation.getSelectedItemId() == R.id.nav_profile && isLoggedIn) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new UserProfileFragment())
+                    .commit();
+        } else if (bottomNavigation.getSelectedItemId() == R.id.nav_profile && !isLoggedIn) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new BeforeLoginFragment())
                     .commit();
         }
     }
