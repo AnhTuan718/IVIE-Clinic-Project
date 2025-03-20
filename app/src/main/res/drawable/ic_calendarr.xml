@@ -1,0 +1,59 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="30dp"
+    android:height="30dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+
+    <path
+        android:pathData="M2 4 C2 2.9 2.9 2 4 2 H20 C21.1 2 22 2.9 22 4 V20 C22 21.1 21.1 22 20 22 H4 C2.9 22 2 21.1 2 20 V4 Z"
+        android:strokeWidth="1"
+        android:strokeColor="#000000"
+        android:fillColor="#87CEEB" />
+
+    <path
+        android:pathData="M6 8 H8 V10 H6 Z"
+        android:fillColor="#00008B" />
+
+    <path
+        android:pathData="M10 8 H12 V10 H10 Z"
+        android:fillColor="#00008B" />
+
+    <path
+        android:pathData="M14 8 H16 V10 H14 Z"
+        android:fillColor="#00008B" />
+
+    <path
+        android:pathData="M6 12 H8 V14 H6 Z"
+        android:fillColor="#00008B" />
+
+    <path
+        android:pathData="M10 12 H12 V14 H10 Z"
+        android:fillColor="#00008B" />
+
+    <path
+        android:pathData="M14 12 H16 V14 H14 Z"
+        android:fillColor="#00008B" />
+
+    <path
+        android:pathData="M6 16 H8 V18 H6 Z"
+        android:fillColor="#00008B" />
+
+    <path
+        android:pathData="M10 16 H12 V18 H10 Z"
+        android:fillColor="#00008B" />
+
+    <path
+        android:pathData="M14 16 H16 V18 H14 Z"
+        android:fillColor="#00008B" />
+
+    <path
+        android:pathData="M14.5 17 L15.5 18 L16.5 16.5"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF" />
+
+    <!-- Thanh trên cùng của lịch (phần đầu tháng) -->
+    <path
+        android:pathData="M4 4 H20 V6 H4 Z"
+        android:fillColor="#00008B" />
+</vector>

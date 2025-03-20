@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="50dp" /> <!-- Bán kính 50dp để tạo hình tròn hoàn toàn với kích thước 100dp -->
+    <solid android:color="@android:color/transparent" />
+</shape>

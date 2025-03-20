@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.UserPage"
+        tools:targetApi="31">
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".UploadResultsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".SearchResultsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".HealthActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".LichKhamActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".OrderHistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".TermsOfUseActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".SettingAplicationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".PolicyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".AboutIVIEActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".NavigationActivity"
+            android:exported="true"
+            android:theme="@style/Theme.UserPage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

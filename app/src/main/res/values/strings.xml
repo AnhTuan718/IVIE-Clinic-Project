@@ -1,0 +1,141 @@
+<resources>
+    <!-- App Strings -->
+    <string name="app_name">Health App</string>
+    <string name="schedule">Lịch khám</string>
+    <string name="back_button">Quay lại</string>
+    <string name="no_data">Không có dữ liệu</string>
+
+    <!-- Navigation Labels -->
+    <string name="home">Trang chủ</string>
+    <string name="shopping">Mua Sắm</string>
+    <string name="notifications">Thông báo</string>
+    <string name="profile">Cá nhân</string>
+
+    <!-- Welcome Card -->
+    <string name="welcome_message">Xin chào, Nguyễn Văn A!</string>
+    <string name="welcome_subtitle">Chúc bạn có một ngày tốt lành và nhiều sức khỏe.</string>
+
+    <!-- Services and Utilities Sections -->
+    <string name="services">Dịch vụ</string>
+    <string name="utilities">Tiện ích</string>
+    <string name="offers">Ưu đãi của tôi</string>
+    <string name="appointments">Lịch khám</string>
+    <string name="orders">Đơn hàng</string>
+    <string name="health_records">Hồ sơ sức khỏe</string>
+
+    <!-- Settings Section -->
+    <string name="settings">Cài đặt</string>
+    <string name="app_settings">Cài đặt ứng dụng</string>
+    <string name="account">Tài khoản</string>
+    <string name="policy">Chính sách</string>
+    <string name="navigate">Điều hướng</string>
+
+    <!-- Misc -->
+    <string name="app_logo">Logo ứng dụng</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="about_ivie_content">
+       Ứng dụng IVIE - Bác sĩ ơi, tên gọi trước đây là ISOFTCARE, đã đồng hành cùng người dùng trong lĩnh vực Y Tế số với sứ mệnh: “Xây dựng hệ sinh thái chăm sóc sức khỏe chu đáo, kết nối Bác sĩ Việt, giúp người dân có thể chăm sóc sức khỏe mọi lúc mọi nơi.” Với các tính năng nổi bật như: đặt lịch ưu tiên, tư vấn trực tuyến, hỏi đáp chuyên gia, quản lý hồ sơ sức khỏe trọn đời, mua và giao thuốc hôm tốc.
+
+Tính đến nay, nền tảng đã chạm tới hơn 60+ cơ sở y tế, hơn 1.5 triệu bệnh viện lớn như Bệnh viện Phổi Trung ương, Bệnh viện Hữu Nghị Việt Đức, Bệnh viện E, Hệ thống y tế Thu Cúc TCI, Bệnh viện 199 Đà Nẵng, Bệnh viện Da liễu Trung ương, với hơn 3000+ bác sĩ đồng hành, trên 100+ nhà thuốc trên ứng dụng. Tất cả mục tiêu trở thành nền tảng ứng dụng dẫn đầu trong ngành y tế số.
+
+Ứng dụng IVIE - Bác sĩ ơi vinh hạnh nhận được các giải thưởng: Quý quân lĩnh vực y tế số cuộc thi đổi mới sáng tạo Techfest 2022, Á quân cuộc thi Access to Health do tổ chức bởi TechShake và Merck, giải thưởng giải pháp thành phố thông minh 2025.
+    </string>
+    <string-array name="country_codes">
+        <item>+84  Việt Nam</item>
+        <item>+1 United States</item>
+        <item>+44 England</item>
+        <item>+91 India</item>
+        <item>+81 Japan</item>
+        <item>+33 France</item>
+        <item>+49 Germany</item>
+        <item>+61 Australia</item>
+    </string-array>
+    <!-- Danh sách Dân tộc -->
+    <string-array name="ethnicity_list">
+        <item>Kinh</item>
+        <item>Hoa</item>
+        <item>Khmer</item>
+        <item>Tày</item>
+        <item>Thái</item>
+        <item>Mường</item>
+        <item>Nùng</item>
+        <item>HMong</item>
+        <item>Dao</item>
+        <item>Gia Rai</item>
+        <item>Ê Đê</item>
+        <item>Ba Na</item>
+        <item>Xơ Đăng</item>
+        <item>Khác</item>
+    </string-array>
+
+    <!-- Danh sách Quốc tịch -->
+    <string-array name="nationality_list">
+        <item>Việt Nam</item>
+        <item>Trung Quốc</item>
+        <item>Hàn Quốc</item>
+        <item>Nhật Bản</item>
+        <item>Mỹ</item>
+        <item>Pháp</item>
+        <item>Khác</item>
+    </string-array>
+
+    <!-- Danh sách Nghề nghiệp -->
+    <string-array name="job_list">
+        <item>Học sinh</item>
+        <item>Sinh viên</item>
+        <item>Nhân viên văn phòng</item>
+        <item>Kinh doanh</item>
+        <item>Kỹ sư</item>
+        <item>Bác sĩ</item>
+        <item>Giáo viên</item>
+        <item>Công nhân</item>
+        <item>Nông dân</item>
+        <item>Khác</item>
+    </string-array>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
