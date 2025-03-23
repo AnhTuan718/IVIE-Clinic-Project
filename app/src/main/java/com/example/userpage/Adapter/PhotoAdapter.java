@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.userpage.Model.Photo;
-import com.example.userpage.PhotoFragment;
+import com.example.userpage.Fragment.PhotoFragment;
 
 import java.util.List;
 
