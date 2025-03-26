@@ -77,7 +77,7 @@ public class BenhVien extends AppCompatActivity implements OnHospitalClick {
         // Khởi tạo danh sách đã lọc
         filteredHospitalList = new ArrayList<>(hospitalList);
 
-        adapter = new HospitalAdapter(hospitalList);
+        adapter = new HospitalAdapter(filteredHospitalList,this);
         recyclerView.setAdapter(adapter);
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override

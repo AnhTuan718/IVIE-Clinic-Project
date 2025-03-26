@@ -15,8 +15,8 @@ import com.example.userpage.R;
 
 import java.util.List;
 
-public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHolder> {
-    public HospitalAdapter(List<Hospital> hospitalList) {
+public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder> {
+    public HospitalAdapter(List<Hospital> hospitalList, OnHospitalClick listener) {
         this.hospitalList = hospitalList;
         this.listener = listener;
     }
@@ -25,14 +25,14 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     private OnHospitalClick listener;
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HospitalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_hospital, parent, false);
-        return new ViewHolder(view);
+        return new HospitalViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(HospitalViewHolder holder, int position) {
         Hospital hospital = hospitalList.get(position);
         holder.hospitalName.setText(hospital.getName());
         holder.hospitalAddress.setText(hospital.getAddress());
@@ -50,12 +50,12 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
         return hospitalList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class HospitalViewHolder extends RecyclerView.ViewHolder {
         ImageView hospitalImage;
         TextView hospitalName;
         TextView hospitalAddress;
 
-        public ViewHolder(View itemView) {
+        public HospitalViewHolder(View itemView) {
             super(itemView);
             hospitalImage = itemView.findViewById(R.id.hospital_image);
             hospitalName = itemView.findViewById(R.id.hospital_name);

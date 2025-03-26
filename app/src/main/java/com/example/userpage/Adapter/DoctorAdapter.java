@@ -40,7 +40,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         notifyDataSetChanged();
     }
 
-    // ViewHolder
+    // HospitalViewHolder
     public static class DoctorViewHolder extends RecyclerView.ViewHolder {
         ImageView doctorImage;
         TextView doctorName;

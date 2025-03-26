@@ -32,9 +32,6 @@ import java.util.List;
 
 public class TrangChuFragment extends Fragment implements RecyclerViewInterface {
 
-    private Handler handler;
-    private int currentPage = 0;
-    private static final int DELAY_TIME = 3000;
     private ViewPager2 mviewPager2;
     private RecyclerView doctorRecyclerView;
     private RecyclerView chuyenKhoaRecyclerView;
@@ -88,9 +85,6 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
         });
         return view;
     }
-
-
-
     private List<Photo> getListPhoto() {
         List<Photo> list = new ArrayList<>();
         list.add(new Photo(R.drawable.quang_cao_ivie2));
