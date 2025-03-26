@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrangChuFragment">
+    tools:context="/Fragment/.TrangChuFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,14 +43,21 @@
                         android:text="IVIE - BÁC SĨ ƠI"
                         android:textColor="@color/white"
                         android:textSize="25sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/searchID"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:queryHint="Tìm Bệnh Viện, Bác Sĩ"/>
+                    <EditText
+                        android:id="@+id/edtTimKiem"
+                        android:layout_width="372dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/bg_search_edt"
+                        android:gravity="center"
+                        android:hint="Nhập tìm bác sĩ ,bệnh viện"
+                        android:textColor="#fff"
+                        android:textColorHint="#B3ADAD"
+                        android:textSize="20sp" />
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -89,7 +95,7 @@
                             android:id="@+id/img_hospital"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/hospital_building"/>
+                            android:src="@drawable/hospital_building" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -97,7 +103,7 @@
                             android:text="Chọn bệnh viện"
                             android:textAlignment="center"
                             android:textColor="#333333"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -121,7 +127,7 @@
                             android:id="@+id/img_HoiBacSi"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/male_doctor"/>
+                            android:src="@drawable/male_doctor" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -129,7 +135,7 @@
                             android:text="Hỏi riêng bác sĩ"
                             android:textAlignment="center"
                             android:textColor="#333333"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -153,7 +159,7 @@
                             android:id="@+id/img_shopping"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/online_shopping"/>
+                            android:src="@drawable/online_shopping" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -161,7 +167,7 @@
                             android:text="Mua sắm"
                             android:textAlignment="center"
                             android:textColor="#333333"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -185,7 +191,7 @@
                             android:id="@+id/img_DatLich"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/doctor_appointment"/>
+                            android:src="@drawable/doctor_appointment" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -193,7 +199,7 @@
                             android:text="Đặt lịch hẹn bác sĩ"
                             android:textAlignment="center"
                             android:textColor="#333333"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -217,7 +223,7 @@
                             android:id="@+id/img_KhamDichVu"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/surgery_room"/>
+                            android:src="@drawable/surgery_room" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -225,7 +231,7 @@
                             android:text="Khám dịch vụ"
                             android:textAlignment="center"
                             android:textColor="#333333"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -249,7 +255,7 @@
                             android:id="@+id/img_lichkham"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/schedule"/>
+                            android:src="@drawable/schedule" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -257,7 +263,7 @@
                             android:text="Lịch Khám"
                             android:textAlignment="center"
                             android:textColor="#333333"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -281,7 +287,7 @@
                             android:id="@+id/img_chatGroup"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/chat"/>
+                            android:src="@drawable/chat" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -289,7 +295,7 @@
                             android:text="Cộng đồng chat bác sĩ"
                             android:textAlignment="center"
                             android:textColor="#333333"
-                            android:textSize="13sp"/>
+                            android:textSize="13sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -313,7 +319,7 @@
                             android:id="@+id/img_hososuckhoe"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/personal_information"/>
+                            android:src="@drawable/personal_information" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -321,7 +327,7 @@
                             android:text="Hồ sơ sức khỏe"
                             android:textAlignment="center"
                             android:textColor="#333333"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </androidx.gridlayout.widget.GridLayout>
@@ -336,7 +342,7 @@
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_star_24"/>
+                    android:src="@drawable/baseline_star_24" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -345,7 +351,7 @@
                     android:layout_weight="1"
                     android:text="Bác Sĩ nổi bật"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -368,8 +374,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="0dp">
+                android:layout_marginTop="0dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -382,7 +388,7 @@
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/baseline_star_24"/>
+                        android:src="@drawable/baseline_star_24" />
 
                     <TextView
                         android:id="@+id/textViewSpecialty"
@@ -391,7 +397,7 @@
                         android:layout_weight="1"
                         android:text="Chuyên Khoa Nổi Bật"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -409,10 +415,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="500dp"
                     android:layout_height="500dp"
-                    android:text="Update"/>
+                    android:text="Update" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

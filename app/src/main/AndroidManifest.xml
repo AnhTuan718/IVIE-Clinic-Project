@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UserPage"
         tools:targetApi="31">
+        <activity android:name=".BSChuThiMinh"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage"/>
+        <activity android:name=".BSNguyenHoangGiang"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage"/>
         <activity
             android:name=".ProfileActivity"
             android:exported="false"
@@ -93,7 +99,6 @@
             android:theme="@style/Theme.UserPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
