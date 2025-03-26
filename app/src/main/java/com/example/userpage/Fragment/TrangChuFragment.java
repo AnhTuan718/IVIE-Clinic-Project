@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SearchView;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -77,7 +78,14 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
         DoctorAdapter adapter = new DoctorAdapter(this, doctorList);
         doctorRecyclerView.setAdapter(adapter);
         //thiet lap chuc nang tim kiem
-
+        CardView hospitalCard = view.findViewById(R.id.hospital_card); // Đảm bảo thêm ID này trong XML
+        hospitalCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BenhVien.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
