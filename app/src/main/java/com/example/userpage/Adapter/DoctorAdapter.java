@@ -1,4 +1,5 @@
 package com.example.userpage.Adapter;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,88 +10,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.userpage.Model.ChuyenKhoa;
+import com.example.userpage.Model.Doctor;
 import com.example.userpage.R;
 import com.example.userpage.RecyclerViewInterface;
-import com.example.userpage.Model.Doctor;
 import java.util.List;
-import java.util.Locale;
-<<<<<<< HEAD
 
-=======
->>>>>>> ab2e079 (Save)
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
     private final RecyclerViewInterface recyclerViewInterface;
     private List<Doctor> doctorList;
-    private Context context;
+    private final Context context;
 
-
-        // Constructor
-    public DoctorAdapter(RecyclerViewInterface recyclerViewInterface, List<Doctor> doctorList) {
+    // Constructor
+    public DoctorAdapter(Context context, RecyclerViewInterface recyclerViewInterface, List<Doctor> doctorList) {
+        this.context = context;
         this.recyclerViewInterface = recyclerViewInterface;
         this.doctorList = doctorList;
     }
 
-    // Thêm phương thức để cập nhật danh sách
+    // Cập nhật danh sách bác sĩ
     public void updateList(List<Doctor> newList) {
         this.doctorList = newList;
         notifyDataSetChanged();
     }
 
-<<<<<<< HEAD
-=======
     @NonNull
     @Override
     public DoctorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull DoctorViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-
-    // ViewHolder
->>>>>>> ab2e079 (Save)
-    // HospitalViewHolder
-    public static class DoctorViewHolder extends RecyclerView.ViewHolder {
-        ImageView doctorImage;
-        TextView doctorName;
-        TextView doctorWorkplace;
-        Button consultButton;
-
-        public DoctorViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
-            super(itemView);
-            doctorImage = itemView.findViewById(R.id.doctorImage);
-            doctorName = itemView.findViewById(R.id.doctorName);
-            doctorWorkplace = itemView.findViewById(R.id.doctorWorkplace);
-            consultButton = itemView.findViewById(R.id.consultButton);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (recyclerViewInterface != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            recyclerViewInterface.onItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
-    }
-<<<<<<< HEAD
-
-    @NonNull
-    @Override
-    public DoctorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.item_doctor, parent, false);
-        return new DoctorViewHolder(view, recyclerViewInterface);
+        return new DoctorViewHolder(view);
     }
 
     @Override
@@ -99,27 +46,37 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         holder.doctorImage.setImageResource(doctor.getImageResId());
         holder.doctorName.setText(doctor.getName());
         holder.doctorWorkplace.setText(doctor.getWorkplace());
-        // xu ly searchView
+
+        // Xử lý sự kiện click vào item
         holder.itemView.setOnClickListener(v -> {
             if (recyclerViewInterface != null) {
                 recyclerViewInterface.onItemClick(position);
             }
         });
+
         // Xử lý sự kiện click nút "Tư vấn ngay"
-        holder.consultButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Tư vấn với " + doctor.getName(), Toast.LENGTH_SHORT).show();
-                // Thêm logic tư vấn thực tế tại đây nếu cần
-            }
-        });
+        holder.consultButton.setOnClickListener(v ->
+                Toast.makeText(context, "Tư vấn với " + doctor.getName(), Toast.LENGTH_SHORT).show()
+        );
     }
 
     @Override
     public int getItemCount() {
-        return doctorList.size();
+        return (doctorList != null) ? doctorList.size() : 0;
     }
-=======
->>>>>>> ab2e079 (Save)
-}
 
+    // ViewHolder cho từng bác sĩ
+    public static class DoctorViewHolder extends RecyclerView.ViewHolder {
+        ImageView doctorImage;
+        TextView doctorName, doctorWorkplace;
+        Button consultButton;
+
+        public DoctorViewHolder(@NonNull View itemView) {
+            super(itemView);
+            doctorImage = itemView.findViewById(R.id.doctorImage);
+            doctorName = itemView.findViewById(R.id.doctorName);
+            doctorWorkplace = itemView.findViewById(R.id.doctorWorkplace);
+            consultButton = itemView.findViewById(R.id.consultButton);
+        }
+    }
+}

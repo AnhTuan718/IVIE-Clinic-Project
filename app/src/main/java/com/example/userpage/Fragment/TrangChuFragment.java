@@ -72,7 +72,7 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
         doctorList.add(new Doctor("BS. Nguyễn Sỹ Đức", "Bệnh viện 115", R.drawable.bs_nguyensyduc));
 
         doctorRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        DoctorAdapter adapter = new DoctorAdapter(this, doctorList);
+        DoctorAdapter adapter = new DoctorAdapter(getActivity(), this, doctorList);
         doctorRecyclerView.setAdapter(adapter);
         //thiet lap chuc nang tim kiem
         CardView hospitalCard = view.findViewById(R.id.hospital_card); // Đảm bảo thêm ID này trong XML
