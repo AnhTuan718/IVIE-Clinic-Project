@@ -4,9 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.SearchView;
+
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,12 +32,11 @@ import java.util.List;
 
 public class TrangChuFragment extends Fragment implements RecyclerViewInterface {
 
-    private Handler handler;
-    private int currentPage = 0;
-    private static final int DELAY_TIME = 3000;
     private ViewPager2 mviewPager2;
     private RecyclerView doctorRecyclerView;
     private RecyclerView chuyenKhoaRecyclerView;
+    DoctorAdapter adapter;
+    EditText edtTimKiem;
 
     @Override
     public void onItemClick(int position) {
@@ -43,7 +48,7 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
-
+        edtTimKiem = view.findViewById(R.id.edtTimKiem);
         mviewPager2 = view.findViewById(R.id.viewpager);
         PhotoAdapter photoAdapter = new PhotoAdapter(getActivity(), getListPhoto());
         mviewPager2.setAdapter(photoAdapter);
@@ -69,29 +74,17 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
         doctorRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         DoctorAdapter adapter = new DoctorAdapter(this, doctorList);
         doctorRecyclerView.setAdapter(adapter);
-
-        handler = new Handler(Looper.getMainLooper());
-        Runnable update = new Runnable() {
+        //thiet lap chuc nang tim kiem
+        CardView hospitalCard = view.findViewById(R.id.hospital_card); // Đảm bảo thêm ID này trong XML
+        hospitalCard.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                if (currentPage == mviewPager2.getAdapter().getItemCount()) {
-                    currentPage = 0;
-                }
-                mviewPager2.setCurrentItem(currentPage++, true);
-                handler.postDelayed(this, DELAY_TIME);
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BenhVien.class);
+                startActivity(intent);
             }
-        };
-        handler.postDelayed(update, DELAY_TIME);
-
+        });
         return view;
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        handler.removeCallbacksAndMessages(null);
-    }
-
     private List<Photo> getListPhoto() {
         List<Photo> list = new ArrayList<>();
         list.add(new Photo(R.drawable.quang_cao_ivie2));

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/detail_hospital_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bs_chuthiminh"/>
+
+    <TextView
+        android:id="@+id/detail_hospital_name"
+        android:layout_width="373dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Bệnh viện chợ rẫy"/>
+
+    <TextView
+        android:id="@+id/detail_hospital_address"
+        android:layout_width="373dp"
+        android:layout_height="149dp"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="benh vien cho ray o quan 5"/>
+</LinearLayout>

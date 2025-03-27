@@ -17,6 +17,7 @@ import com.example.userpage.Model.Doctor;
 
 
 import java.util.List;
+import java.util.Locale;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
 
@@ -25,13 +26,20 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     private List<Doctor> doctorList;
     private Context context;
 
-    // Constructor
+
+        // Constructor
     public DoctorAdapter(RecyclerViewInterface recyclerViewInterface, List<Doctor> doctorList) {
         this.recyclerViewInterface = recyclerViewInterface;
         this.doctorList = doctorList;
     }
 
-    // ViewHolder
+    // Thêm phương thức để cập nhật danh sách
+    public void updateList(List<Doctor> newList) {
+        this.doctorList = newList;
+        notifyDataSetChanged();
+    }
+
+    // HospitalViewHolder
     public static class DoctorViewHolder extends RecyclerView.ViewHolder {
         ImageView doctorImage;
         TextView doctorName;
@@ -72,7 +80,12 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         holder.doctorImage.setImageResource(doctor.getImageResId());
         holder.doctorName.setText(doctor.getName());
         holder.doctorWorkplace.setText(doctor.getWorkplace());
-
+        // xu ly searchView
+        holder.itemView.setOnClickListener(v -> {
+            if (recyclerViewInterface != null) {
+                recyclerViewInterface.onItemClick(position);
+            }
+        });
         // Xử lý sự kiện click nút "Tư vấn ngay"
         holder.consultButton.setOnClickListener(new View.OnClickListener() {
             @Override

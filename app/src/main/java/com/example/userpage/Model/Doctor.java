@@ -22,4 +22,7 @@ public class Doctor {
     public int getImageResId() {
         return imageResId;
     }
+
+
+
 }
