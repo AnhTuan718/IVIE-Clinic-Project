@@ -331,4 +331,12 @@
             android:textSize="18sp"
             android:backgroundTint="@color/green"/>
     </LinearLayout>
+    <Button
+        android:id="@+id/button_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Chat với bác sĩ"
+        android:backgroundTint="@color/green"
+        android:textColor="@android:color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>

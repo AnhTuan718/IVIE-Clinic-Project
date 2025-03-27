@@ -3,6 +3,7 @@ package com.example.userpage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class BSNguyenHoangGiang extends AppCompatActivity {
         TextView clinicAddress = findViewById(R.id.clinic_address);
         TextView onlineAddress = findViewById(R.id.online_address);
         TextView directConsultation = findViewById(R.id.direct_consultation);
+        Button buttonChat = findViewById(R.id.button_chat);
 
         // Set data with string resources
         doctorName.setText("BS Nguyễn Hoàng Giang");
@@ -74,10 +76,10 @@ public class BSNguyenHoangGiang extends AppCompatActivity {
         doctorInfoTitle.setOnClickListener(v -> {
             if (doctorInfoContent.getVisibility() == View.GONE) {
                 doctorInfoContent.setVisibility(View.VISIBLE);
-                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_collapse, 0); // Icon khi mở
+                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_collapse, 0);
             } else {
                 doctorInfoContent.setVisibility(View.GONE);
-                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand, 0); // Icon khi thu gọn
+                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand, 0);
             }
         });
 
@@ -96,6 +98,14 @@ public class BSNguyenHoangGiang extends AppCompatActivity {
                     getString(R.string.appointment_count_label) + ": " + appointmentCount.getText();
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
             startActivity(Intent.createChooser(shareIntent, "Chia sẻ qua"));
+        });
+
+        // Xử lý nút Chat
+        buttonChat.setOnClickListener(v -> {
+            Intent chatIntent = new Intent(BSNguyenHoangGiang.this, ChatActivity.class);
+            chatIntent.putExtra("doctor_name", doctorName.getText().toString());
+            chatIntent.putExtra("doctor_id", "doctor_id_placeholder"); // Thay bằng ID thực tế của bác sĩ
+            startActivity(chatIntent);
         });
     }
 }

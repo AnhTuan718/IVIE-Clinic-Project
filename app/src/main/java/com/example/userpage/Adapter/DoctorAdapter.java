@@ -1,5 +1,4 @@
 package com.example.userpage.Adapter;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,19 +9,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.userpage.Model.ChuyenKhoa;
 import com.example.userpage.R;
 import com.example.userpage.RecyclerViewInterface;
 import com.example.userpage.Model.Doctor;
-
-
 import java.util.List;
 import java.util.Locale;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ab2e079 (Save)
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
-
     private final RecyclerViewInterface recyclerViewInterface;
-
     private List<Doctor> doctorList;
     private Context context;
 
@@ -39,6 +37,26 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         notifyDataSetChanged();
     }
 
+<<<<<<< HEAD
+=======
+    @NonNull
+    @Override
+    public DoctorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull DoctorViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+
+    // ViewHolder
+>>>>>>> ab2e079 (Save)
     // HospitalViewHolder
     public static class DoctorViewHolder extends RecyclerView.ViewHolder {
         ImageView doctorImage;
@@ -46,7 +64,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         TextView doctorWorkplace;
         Button consultButton;
 
-        public DoctorViewHolder(@NonNull View itemView,RecyclerViewInterface recyclerViewInterface) {
+        public DoctorViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             doctorImage = itemView.findViewById(R.id.doctorImage);
             doctorName = itemView.findViewById(R.id.doctorName);
@@ -55,9 +73,9 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(recyclerViewInterface != null){
+                    if (recyclerViewInterface != null) {
                         int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
+                        if (position != RecyclerView.NO_POSITION) {
                             recyclerViewInterface.onItemClick(position);
                         }
                     }
@@ -65,6 +83,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
             });
         }
     }
+<<<<<<< HEAD
 
     @NonNull
     @Override
@@ -100,4 +119,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     public int getItemCount() {
         return doctorList.size();
     }
+=======
+>>>>>>> ab2e079 (Save)
 }
+

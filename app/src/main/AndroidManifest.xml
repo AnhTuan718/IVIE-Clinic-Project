@@ -33,6 +33,10 @@
             android:name=".Fragment.BenhVien"
             android:exported="false" />
         <activity
+            android:name=".Fragment.HospitalDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
             android:name=".ChatActivity"
             android:exported="false"
             android:theme="@style/Theme.UserPage" />
