@@ -1,4 +1,6 @@
 package com.example.userpage;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -10,6 +12,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class ChangePasswordActivity extends AppCompatActivity {
 
     private EditText etCurrentPassword, etNewPassword, etConfirmNewPassword;
@@ -17,10 +29,60 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private boolean isNewPasswordVisible = false;
     private boolean isConfirmPasswordVisible = false;
 
+    private FirebaseAuth mAuth;
+    private DatabaseReference userRef;
+    private DatabaseReference emailToClientKeyRef;
+    private String clientKey;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+
+        // Initialize Firebase
+        mAuth = FirebaseAuth.getInstance();
+        userRef = FirebaseDatabase.getInstance().getReference("users");
+        emailToClientKeyRef = FirebaseDatabase.getInstance().getReference("emailToClientKey");
+
+        // Check if user is logged in
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(this, "Vui lòng đăng nhập để tiếp tục!", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
+        // Get clientKey from emailToClientKey
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String email = prefs.getString("userEmail", null);
+        if (email == null) {
+            Toast.makeText(this, "Không tìm thấy email. Vui lòng đăng nhập lại!", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
+        String emailKey = email.replace(".", ",");
+        emailToClientKeyRef.child(emailKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    clientKey = dataSnapshot.getValue(String.class);
+                    if (clientKey == null) {
+                        Toast.makeText(ChangePasswordActivity.this, "Lỗi: Không tìm thấy clientKey!", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                } else {
+                    Toast.makeText(ChangePasswordActivity.this, "Không tìm thấy dữ liệu người dùng!", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(ChangePasswordActivity.this, "Lỗi: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
 
         // Initialize views
         ImageButton btnBack = findViewById(R.id.btnBack);
@@ -42,14 +104,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
             String confirmNewPassword = etConfirmNewPassword.getText().toString().trim();
 
             if (validateInput(currentPassword, newPassword, confirmNewPassword)) {
-                Toast.makeText(this, "Mật khẩu đã được đổi thành công!", Toast.LENGTH_SHORT).show();
-                finish();
+                changePassword(currentPassword, newPassword);
             }
         });
     }
 
     private void setupPasswordToggle() {
-        // Tạo một listener chung cho tất cả EditText
         View.OnTouchListener passwordToggleListener = (v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 EditText editText = (EditText) v;
@@ -69,7 +129,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
             return false;
         };
 
-        // Áp dụng listener cho từng EditText
         etCurrentPassword.setOnTouchListener(passwordToggleListener);
         etNewPassword.setOnTouchListener(passwordToggleListener);
         etConfirmNewPassword.setOnTouchListener(passwordToggleListener);
@@ -114,7 +173,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 break;
         }
 
-        editText.setSelection(cursorPosition); // Keep cursor position
+        editText.setSelection(cursorPosition);
     }
 
     private boolean validateInput(String currentPassword, String newPassword, String confirmNewPassword) {
@@ -134,5 +193,50 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void changePassword(String currentPassword, String newPassword) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null || user.getEmail() == null) {
+            Toast.makeText(this, "Lỗi: Không tìm thấy người dùng", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Re-authenticate the user
+        AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPassword);
+        user.reauthenticate(credential)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Update password in Firebase Authentication
+                        user.updatePassword(newPassword)
+                                .addOnCompleteListener(updateTask -> {
+                                    if (updateTask.isSuccessful()) {
+                                        // Update password in Realtime Database
+                                        updatePasswordInDatabase(newPassword);
+                                    } else {
+                                        Toast.makeText(ChangePasswordActivity.this, "Lỗi: " + updateTask.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                    } else {
+                        Toast.makeText(ChangePasswordActivity.this, "Mật khẩu cũ không đúng", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void updatePasswordInDatabase(String newPassword) {
+        if (clientKey == null) {
+            Toast.makeText(this, "Lỗi: Không tìm thấy clientKey!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        userRef.child(clientKey).child("password").setValue(newPassword)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(ChangePasswordActivity.this, "Mật khẩu đã được đổi thành công!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(ChangePasswordActivity.this, "Lỗi cập nhật mật khẩu trong cơ sở dữ liệu: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }

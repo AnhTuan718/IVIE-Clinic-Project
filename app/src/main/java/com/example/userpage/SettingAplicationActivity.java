@@ -1,14 +1,16 @@
 package com.example.userpage;
 
 import android.app.AlertDialog;
+import android.content.res.Configuration;
 import android.os.Bundle;
-
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Locale;
 
 public class SettingAplicationActivity extends AppCompatActivity {
 
@@ -33,8 +35,6 @@ public class SettingAplicationActivity extends AppCompatActivity {
 
         // Language selection click
         languageOption.setOnClickListener(v -> showLanguageDialog());
-
-
     }
 
     private void showLanguageDialog() {
@@ -53,13 +53,30 @@ public class SettingAplicationActivity extends AppCompatActivity {
             currentLanguage = languages[which];
             tvCurrentLanguage.setText(currentLanguage);
 
-            // Here you would implement actual language change
-            // For example: setLocale(currentLanguage);
+            // Implement language change
+            if ("English".equals(currentLanguage)) {
+                setLocale("en");
+            } else {
+                setLocale("vi");
+            }
 
             dialog.dismiss();
             Toast.makeText(this, "Ngôn ngữ: " + currentLanguage, Toast.LENGTH_SHORT).show();
         });
 
         builder.show();
+    }
+
+    private void setLocale(String langCode) {
+        Locale locale = new Locale(langCode);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
+        // Restart activity to apply changes
+        recreate();
     }
 }

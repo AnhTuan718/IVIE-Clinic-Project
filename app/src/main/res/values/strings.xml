@@ -99,6 +99,24 @@ Tính đến nay, nền tảng đã chạm tới hơn 60+ cơ sở y tế, hơn 
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="no_appointment_data">Hiện tại không có lịch khám nào trong danh mục này</string>
+    <string name="no_order_data">Bạn chưa có đơn hàng nào trong danh mục này.</string>
+
+    <string name="doctor_price_format">%1$s %2$s %3$s</string>
+    <string name="doctor_specialty_label">Chuyên khoa:</string>
+    <string name="doctor_price_label">Giá khám:</string>
+    <string name="doctor_vnd_currency">VNĐ</string>
+    <string name="doctor_workplace_label">Nơi công tác:</string>
+    <string name="doctor_online_consultation_label">Nơi tư vấn online:</string>
+    <string name="appointment_count_label">Lượt hẹn khám</string>
+    <string name="call_count_label">Lượt gọi khám</string>
+    <string name="consultation_count_label">Lượt tư vấn</string>
+    <string name="doctor_info_title">Thông tin bác sĩ</string>
+    <string name="address_label">Địa chỉ:</string>
+    <string name="direct_consultation_label">Tư vấn trực tiếp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -136,6 +154,4 @@ Tính đến nay, nền tảng đã chạm tới hơn 60+ cơ sở y tế, hơn 
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

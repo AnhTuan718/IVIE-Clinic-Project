@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1030891682831",
+    "firebase_url": "https://ivie-ffccc-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ivie-ffccc",
+    "storage_bucket": "ivie-ffccc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030891682831:android:7174d15e81adfeca62f77a",
+        "android_client_info": {
+          "package_name": "com.example.userpage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030891682831-8n0ddhh8dehnb5oeoemafmhsjvdgrsbe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.userpage",
+            "certificate_hash": "8a3c19374f996d0dcf2c51ace630c17eb97d5587"
+          }
+        },
+        {
+          "client_id": "1030891682831-r7qd35ln3hhk4rl7c12394qui57nf09j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHnGfVxl5ogdtBgJvD3yNrPgjnyOL2ENU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030891682831-r7qd35ln3hhk4rl7c12394qui57nf09j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

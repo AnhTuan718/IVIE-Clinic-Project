@@ -20,6 +20,11 @@ import com.example.userpage.R;
 import com.example.userpage.SettingAplicationActivity;
 import com.example.userpage.EditProfileActivity;
 import com.example.userpage.databinding.FragmentUserProfileBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserProfileFragment extends Fragment {
 
@@ -43,6 +48,9 @@ public class UserProfileFragment extends Fragment {
                 binding.profileImage.setImageResource(R.drawable.default_avatar);
             }
         }
+
+        // Load username from Realtime Database
+        loadUsernameFromDatabase();
 
         // Edit profile launcher
         editProfileLauncher = registerForActivityResult(
@@ -71,6 +79,64 @@ public class UserProfileFragment extends Fragment {
         return view;
     }
 
+    private void loadUsernameFromDatabase() {
+        // Lấy email từ SharedPreferences
+        SharedPreferences prefs = getActivity().getSharedPreferences("MyPrefs", getActivity().MODE_PRIVATE);
+        String email = prefs.getString("userEmail", null);
+
+        if (email == null) {
+            Toast.makeText(getActivity(), "Không tìm thấy email. Vui lòng đăng nhập lại!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Truy vấn emailToClientKey để tìm clientKey
+        DatabaseReference emailToClientKeyRef = FirebaseDatabase.getInstance().getReference("emailToClientKey");
+        String emailKey = email.replace(".", ",");
+        emailToClientKeyRef.child(emailKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    Toast.makeText(getActivity(), "Không tìm thấy dữ liệu người dùng!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                String clientKey = dataSnapshot.getValue(String.class);
+                if (clientKey == null) {
+                    Toast.makeText(getActivity(), "Lỗi: Không tìm thấy clientKey!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                // Truy vấn users/clientX để lấy username
+                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(clientKey);
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot userSnapshot) {
+                        if (userSnapshot.exists()) {
+                            String username = userSnapshot.child("username").getValue(String.class);
+                            if (username != null) {
+                                binding.tvProfileName.setText(username);
+                            } else {
+                                Toast.makeText(getActivity(), "Không tìm thấy username!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "Không tìm thấy dữ liệu người dùng!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), "Lỗi: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Lỗi: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void setupClickListeners() {
         binding.layoutOffer.setOnClickListener(v -> showToast("Ưu đãi của tôi"));
         binding.layoutAppointment.setOnClickListener(v ->
@@ -80,7 +146,7 @@ public class UserProfileFragment extends Fragment {
         binding.layoutHealthRecord.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), HealthActivity.class);
             SharedPreferences prefs = getActivity().getSharedPreferences("MyPrefs", getActivity().MODE_PRIVATE);
-            currentImageUri = prefs.getString("AVATAR_URI", null); // Cập nhật URI từ SharedPreferences
+            currentImageUri = prefs.getString("AVATAR_URI", null);
             if (currentImageUri != null) {
                 intent.putExtra("IMAGE_URI", currentImageUri);
             }
