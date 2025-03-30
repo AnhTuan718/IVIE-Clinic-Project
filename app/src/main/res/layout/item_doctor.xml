@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/bs_chuthiminh"/>
+            android:contentDescription="@string/doctor_image" />
 
         <!-- Tên bác sĩ -->
         <TextView
@@ -28,10 +28,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="BS. Nguyễn Văn A"
+            android:text="@string/doctor_name_placeholder"
             android:textColor="#333333"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <!-- Nơi làm việc -->
         <TextView
@@ -39,9 +39,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Bệnh viện Chợ Rẫy"
+            android:text="@string/doctor_workplace_placeholder"
             android:textColor="#666666"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
+
+        <!-- Chuyên khoa -->
+        <TextView
+            android:id="@+id/doctorSpecialization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/doctor_specialization_placeholder"
+            android:textColor="#666666"
+            android:textSize="14sp" />
 
         <!-- Nút tư vấn ngay -->
         <Button
@@ -50,9 +60,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="#4CAF50"
-            android:text="Tư vấn ngay"
+            android:text="@string/consult_now"
             android:textColor="@android:color/white"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.UserPage"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".NavigationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Database.LoginActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Admin.MedicineDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Admin.AddMedicineActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Admin.MedicineManagementActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Admin.EditDoctorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Doctor.DoctorManagementActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Admin.AdminDashboardActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Admin.AddDoctorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Doctor.DoctorEditProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Doctor.DoctorLichKhamActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Doctor.DoctorMainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".UploadResultsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".SearchResultsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".HealthActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".LichKhamActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".OrderHistoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Database.RegisterActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".TermsOfUseActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".SettingAplicationActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PolicyActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AboutIVIEActivity"
+            android:exported="false" />
+
+    </application>
+</manifest> 
