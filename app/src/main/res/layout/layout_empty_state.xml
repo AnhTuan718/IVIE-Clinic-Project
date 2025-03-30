@@ -7,7 +7,6 @@
     android:gravity="center"
     android:background="@android:color/white">
 
-    <!-- Hình ảnh biểu tượng (icon) cho trạng thái rỗng -->
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -15,26 +14,21 @@
         android:scaleType="fitCenter"
         android:layout_marginBottom="16dp" />
 
-    <!-- Tiêu đề -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Không có dữ liệu"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp" />
+        android:text="@string/no_data"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:textColor="#333333"
+    android:layout_marginBottom="8dp" />
 
-    <!-- Mô tả (nếu cần) -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bạn chưa có đơn hàng nào trong danh mục này."
-        android:textSize="16sp"
-        android:textColor="#666666"
-        android:gravity="center"
-        android:layout_marginBottom="32dp" />
-
-    <!-- Nút hành động (nếu cần, ví dụ: Quay lại hoặc Tạo đơn hàng) -->
-
+        android:text="@string/no_order_data"
+    android:textSize="16sp"
+    android:textColor="#666666"
+    android:gravity="center"
+    android:layout_marginBottom="32dp" />
 </LinearLayout>

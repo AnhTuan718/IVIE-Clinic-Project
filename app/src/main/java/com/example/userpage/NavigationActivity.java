@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.example.userpage.Database.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.userpage.Fragment.BeforeLoginFragment;
 import com.example.userpage.Fragment.TrangChuFragment;
@@ -59,7 +61,7 @@ public class NavigationActivity extends AppCompatActivity {
             bottomNavigation.setSelectedItemId(R.id.nav_home);
         }
 
-        // Xử lý intent từ LoginActivity để chọn tab (sau khi đăng nhập)
+        // Xử lý intent từ LoginActivity hoặc AccountActivity để chọn tab
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("SELECTED_TAB")) {
             int selectedTab = intent.getIntExtra("SELECTED_TAB", R.id.nav_home);
@@ -73,21 +75,29 @@ public class NavigationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Cập nhật trạng thái hiển thị sau khi quay lại từ LoginActivity
+    // Cập nhật trạng thái hiển thị sau khi quay lại từ LoginActivity hoặc AccountActivity
     @Override
     protected void onResume() {
         super.onResume();
-        // Kiểm tra nếu đang ở mục "User" và đã đăng nhập
+        // Kiểm tra nếu đang ở mục "User" và cập nhật Fragment tương ứng
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean isLoggedIn = prefs.getBoolean(KEY_IS_LOGGED_IN, false);
-        if (bottomNavigation.getSelectedItemId() == R.id.nav_profile && isLoggedIn) {
+        if (bottomNavigation.getSelectedItemId() == R.id.nav_profile) {
+            Fragment selectedFragment = isLoggedIn ? new UserProfileFragment() : new BeforeLoginFragment();
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new UserProfileFragment())
+                    .replace(R.id.fragment_container, selectedFragment)
                     .commit();
-        } else if (bottomNavigation.getSelectedItemId() == R.id.nav_profile && !isLoggedIn) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new BeforeLoginFragment())
-                    .commit();
+        }
+    }
+
+    // Xử lý intent mới (khi quay lại từ AccountActivity hoặc LoginActivity)
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (intent != null && intent.hasExtra("SELECTED_TAB")) {
+            int selectedTab = intent.getIntExtra("SELECTED_TAB", R.id.nav_home);
+            bottomNavigation.setSelectedItemId(selectedTab);
         }
     }
 }

@@ -13,7 +13,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/green"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -30,13 +30,13 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_back_24"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Back" />
+                android:contentDescription="@string/back_button" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Thông tin bác sĩ"
+                android:text="@string/doctor_info_title"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:gravity="center"
@@ -64,7 +64,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Doctor Image -->
         <ImageView
             android:id="@+id/doctor_image"
             android:layout_width="100dp"
@@ -75,7 +74,6 @@
             android:background="@drawable/round_image_background"
             android:clipToOutline="true" />
 
-        <!-- Doctor Details -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -83,7 +81,6 @@
             android:orientation="vertical"
             android:paddingStart="16dp">
 
-            <!-- Doctor Name -->
             <TextView
                 android:id="@+id/doctor_name"
                 android:layout_width="wrap_content"
@@ -100,7 +97,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_star_24"/>
-                <!-- Rating -->
                 <TextView
                     android:id="@+id/doctor_rating"
                     android:layout_width="wrap_content"
@@ -112,29 +108,25 @@
                     android:textColor="@android:color/darker_gray" />
             </LinearLayout>
 
-            <!-- Specialty -->
             <TextView
                 android:id="@+id/doctor_specialty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chuyên khoa: Nội tổng quát"
+                android:text="@string/doctor_specialty_label"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp"
                 android:textColor="@android:color/darker_gray" />
 
-            <!-- Price -->
             <TextView
                 android:id="@+id/doctor_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Giá khám: 300.000 VNĐ"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp"
                 android:textColor="@android:color/darker_gray" />
-
         </LinearLayout>
-
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/additional_info_layout"
         android:layout_width="match_parent"
@@ -149,7 +141,7 @@
             android:id="@+id/doctor_workplace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nơi công tác: Bệnh viện Tràng An"
+            android:text="@string/doctor_workplace_label"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@android:color/black" />
@@ -158,11 +150,12 @@
             android:id="@+id/doctor_online_consultation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nơi tư vấn online: Bác sĩ ơi - Phòng khm O2O"
+            android:text="@string/doctor_online_consultation_label"
             android:textSize="14sp"
             android:layout_marginTop="8dp"
             android:textColor="@android:color/black" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/statistics_layout"
         android:layout_width="match_parent"
@@ -174,7 +167,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Appointment Count -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -192,12 +184,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lượt hẹn khám"
+                android:text="@string/appointment_count_label"
                 android:textSize="12sp"
                 android:textColor="@android:color/darker_gray" />
         </LinearLayout>
 
-        <!-- Call Count -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -215,12 +206,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lượt gọi khám"
+                android:text="@string/call_count_label"
                 android:textSize="12sp"
                 android:textColor="@android:color/darker_gray" />
         </LinearLayout>
 
-        <!-- Consultation Count -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -238,10 +228,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lượt tư vấn"
+                android:text="@string/consultation_count_label"
                 android:textSize="12sp"
                 android:textColor="@android:color/darker_gray" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/expandable_info_container"
             android:layout_width="wrap_content"
@@ -258,7 +249,6 @@
                 android:textColor="@android:color/black"
                 android:visibility="gone" />
         </LinearLayout>
-
     </LinearLayout>
 
     <TextView
@@ -269,16 +259,13 @@
         android:drawableEnd="@drawable/ic_expand"
         android:drawablePadding="8dp"
         android:padding="8dp"
-        android:text="Thông tin bác sĩ"
+        android:text="@string/doctor_info_title"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statistics_layout" />
 
-    <!-- Clinic Address Layout -->
-
-    <!-- Direct Consultation Layout -->
     <LinearLayout
         android:id="@+id/clinic_address_layout"
         android:layout_width="match_parent"
@@ -308,7 +295,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingStart="8dp"
-                android:text="Địa chỉ: 123 Đường Láng Hạ, Quận Đống Đa, Hà Nội"
+                android:text="@string/address_label"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
             <TextView
@@ -321,14 +308,11 @@
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
         </LinearLayout>
-
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/direct_consultation_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -340,13 +324,10 @@
             android:id="@+id/direct_consultation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tư vấn trực tiếp"
+            android:text="@string/direct_consultation_label"
             android:layout_gravity="center"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:backgroundTint="@color/green"/>
     </LinearLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

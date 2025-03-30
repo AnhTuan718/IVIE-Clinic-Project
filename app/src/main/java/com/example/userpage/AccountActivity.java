@@ -45,7 +45,7 @@ public class AccountActivity extends AppCompatActivity {
 
                         // Chuyển về NavigationActivity và chọn tab "User"
                         Intent intent = new Intent(AccountActivity.this, NavigationActivity.class);
-                        intent.putExtra("SELECTED_TAB", R.id.nav_profile);
+                        intent.putExtra("SELECTED_TAB", R.id.nav_home);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         finish(); // Đóng màn hình AccountActivity

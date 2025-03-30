@@ -1,4 +1,4 @@
-package com.example.userpage;
+package com.example.userpage.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.userpage.Model.Photo;
+import com.example.userpage.R;
 
 public class PhotoFragment extends Fragment {
     private View mView;

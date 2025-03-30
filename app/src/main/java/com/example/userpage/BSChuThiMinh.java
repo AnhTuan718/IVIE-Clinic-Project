@@ -26,8 +26,10 @@ public class BSChuThiMinh extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Doctor info setup
         ImageView doctorImage = findViewById(R.id.doctor_image);
         TextView doctorName = findViewById(R.id.doctor_name);
@@ -42,37 +44,40 @@ public class BSChuThiMinh extends AppCompatActivity {
         TextView doctorInfoTitle = findViewById(R.id.doctor_info_title);
         TextView doctorInfoContent = findViewById(R.id.doctor_info_content);
         TextView clinicAddress = findViewById(R.id.clinic_address);
+        TextView onlineAddress = findViewById(R.id.online_address);
         TextView directConsultation = findViewById(R.id.direct_consultation);
 
-        // Set data
-        // doctorImage.setImageResource(R.drawable.doctor_image);
-        doctorName.setText("BS. Nguyễn Văn A");
+        // Set data with string resources
+        doctorName.setText("ThsBs Chu Thị Minh");
         doctorRating.setText("4.5/5 (120 đánh giá)");
-        doctorSpecialty.setText("Chuyên khoa: Nội tổng quát");
-        doctorPrice.setText("Giá khám: 300.000 VNĐ");
-        doctorWorkplace.setText("Nơi công tác: Bệnh viện Chợ Rẫy");
-        doctorOnlineConsultation.setText("Nơi tư vấn online: Ứng dụng HealthCare");
+        doctorSpecialty.setText(getString(R.string.doctor_specialty_label) + " Nội tổng quát");
+        doctorPrice.setText(getString(R.string.doctor_price_format,
+                getString(R.string.doctor_price_label), "300.000", getString(R.string.doctor_vnd_currency)));
+        doctorWorkplace.setText(getString(R.string.doctor_workplace_label) + " Bệnh viện Tràng An");
+        doctorOnlineConsultation.setText(getString(R.string.doctor_online_consultation_label) + " Bác sĩ ơi - Phòng khám O2O");
         appointmentCount.setText("150");
         callCount.setText("80");
         consultationCount.setText("200");
-        doctorInfoContent.setText("Bác sĩ Nguyễn Văn A tốt nghiệp Đại học Y Dược TP.HCM, có hơn 10 năm kinh nghiệm trong lĩnh vực nội khoa. Chuyên môn cao về các bệnh lý tiêu hóa và hô hấp.");
-        clinicAddress.setText("Địa chỉ: 123 Đường Láng Hạ, Quận Đống Đa, Hà Nội");
-        directConsultation.setText("Tư vấn trực tiếp:");
+        doctorInfoContent.setText("Bác sĩ Chu Thị Minh tốt nghiệp Đại học Y Dược TP.HCM, có hơn 10 năm kinh nghiệm trong lĩnh vực nội khoa.");
+        clinicAddress.setText(getString(R.string.address_label) + " 123 Đường Láng Hạ, Quận Đống Đa, Hà Nội");
+        onlineAddress.setText("Phòng B19 - Tổ hợp Y Tế Chất lượng cao Mediplus, 99 Tân Mai, Hoàng Mai, Thành Phố Hà Nội");
+        directConsultation.setText(getString(R.string.direct_consultation_label));
 
-        // Nhận dữ liệu từ Intent
+        // Nhận dữ liệu từ Intent (nếu có)
         Intent intent = getIntent();
         String name = intent.getStringExtra("doctor_name");
         String specialty = intent.getStringExtra("doctor_specialty");
+        if (name != null) doctorName.setText(name);
+        if (specialty != null) doctorSpecialty.setText(getString(R.string.doctor_specialty_label) + " " + specialty);
 
         // Handle expandable section
         doctorInfoTitle.setOnClickListener(v -> {
             if (doctorInfoContent.getVisibility() == View.GONE) {
                 doctorInfoContent.setVisibility(View.VISIBLE);
-                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand, 0);
+                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_collapse, 0); // Icon khi mở
             } else {
                 doctorInfoContent.setVisibility(View.GONE);
-                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand, 0);
-                // Để xoay icon khi thu gọn, bạn có thể cần tạo một icon khác hoặc dùng animation
+                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand, 0); // Icon khi thu gọn
             }
         });
 
@@ -83,13 +88,12 @@ public class BSChuThiMinh extends AppCompatActivity {
         // Xử lý nút Share
         ImageButton btnShare = findViewById(R.id.btn_share);
         btnShare.setOnClickListener(v -> {
-            // Thêm logic chia sẻ ở đây
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            String shareText = "Thông tin bác sĩ: " + doctorName.getText() + "\n" +
+            String shareText = getString(R.string.doctor_info_title) + ": " + doctorName.getText() + "\n" +
                     doctorSpecialty.getText() + "\n" +
                     doctorWorkplace.getText() + "\n" +
-                    "Lượt hẹn khám: " + appointmentCount.getText();
+                    getString(R.string.appointment_count_label) + ": " + appointmentCount.getText();
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
             startActivity(Intent.createChooser(shareIntent, "Chia sẻ qua"));
         });
