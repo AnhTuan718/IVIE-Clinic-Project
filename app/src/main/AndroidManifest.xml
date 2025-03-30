@@ -19,12 +19,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UserPage"
         tools:targetApi="31">
-        <activity android:name=".BSChuThiMinh"
+        <activity
+            android:name=".Shopping.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Shopping.ProductDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Shopping.ProductListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragment.BookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BSChuThiMinh"
             android:exported="false"
-            android:theme="@style/Theme.UserPage"/>
-        <activity android:name=".BSNguyenHoangGiang"
+            android:theme="@style/Theme.UserPage" />
+        <activity
+            android:name=".BSNguyenHoangGiang"
             android:exported="false"
-            android:theme="@style/Theme.UserPage"/>
+            android:theme="@style/Theme.UserPage" />
         <activity
             android:name=".Fragment.HospitalDetailActivity"
             android:exported="false" />
@@ -105,6 +119,7 @@
             android:theme="@style/Theme.UserPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

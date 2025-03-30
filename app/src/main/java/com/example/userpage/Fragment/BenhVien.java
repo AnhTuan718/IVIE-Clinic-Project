@@ -50,30 +50,30 @@ public class BenhVien extends AppCompatActivity implements OnHospitalClick {
 
         // Dữ liệu mẫu
         hospitalList = new ArrayList<>();
-        hospitalList.add(new Hospital(R.drawable.trung_tam_chan_troi_moi,
+        hospitalList.add(new Hospital(R.drawable.logo_trung_tam_chan_troi_moi,
                 "Số 76 Phố An Dương", "Trung Tâm Chăm Sóc Giảm Nhẹ Chân Trời Mới - Cơ sở 1 "));
         hospitalList.add(new Hospital(R.drawable.logo_benh_vien_199,
                 "Số 216 Nguyễn Công Trứ, An Hải Đông, Sơn Trà, Đà Nẵng", "Bệnh viện 199 - Đà Nẵng"));
-        hospitalList.add(new Hospital(R.drawable.bs_nguyensyduc,
+        hospitalList.add(new Hospital(R.drawable.logo_binh_an,
+                "123 Đường Lê Lợi, Quận 1, TP. Hồ Chí Minh", "Bệnh viện Đa khoa Bình An"));
+        hospitalList.add(new Hospital(R.drawable.logo_phong_kham_da_khoa_hung_thinh,
+                "456 Đường Hoàng Diệu, Quận 7, TP. Hồ Chí Minh", "Phòng khám Đa khoa Hưng Thịnh"));
+        hospitalList.add(new Hospital(R.drawable.logo_benh_vien_qt_an_phu,
+                "789 Đường Nguyễn Trãi, Quận 5, TP. Hồ Chí Minh", "Bệnh viện Quốc tế An Phú"));
+        hospitalList.add(new Hospital(R.drawable.logo_bv_tu_du,
                 "284 Cống Quỳnh, Quận 1, TP.HCM", "Bệnh viện Từ Dũ"));
-        hospitalList.add(new Hospital(R.drawable.bs_chuthiminh,
-                "zx", "Bệnh viện chợ rẫy"));
-        hospitalList.add(new Hospital(R.drawable.bs_nguyenhoanggiang,
-                "78 Giải Phóng, Đống Đa, Hà Nội", "Bệnh viện Bạch Mai"));
-        hospitalList.add(new Hospital(R.drawable.bs_nguyensyduc,
-                "284 Cống Quỳnh, Quận 1, TP.HCM", "Bệnh viện Từ Dũ"));
-        hospitalList.add(new Hospital(R.drawable.bs_chuthiminh,
-                "201B Nguyễn Chí Thanh, Quận 5, TP.HCM", "Bệnh viện chợ rẫy"));
-        hospitalList.add(new Hospital(R.drawable.bs_nguyenhoanggiang,
-                "78 Giải Phóng, Đống Đa, Hà Nội", "Bệnh viện Bạch Mai"));
-        hospitalList.add(new Hospital(R.drawable.bs_nguyensyduc,
-                "284 Cống Quỳnh, Quận 1, TP.HCM", "Bệnh viện Từ Dũ"));
-        hospitalList.add(new Hospital(R.drawable.bs_chuthiminh,
-                "201B Nguyễn Chí Thanh, Quận 5, TP.HCM", "Bệnh viện chợ rẫy"));
-        hospitalList.add(new Hospital(R.drawable.bs_nguyenhoanggiang,
-                "78 Giải Phóng, Đống Đa, Hà Nội", "Bệnh viện Bạch Mai"));
-        hospitalList.add(new Hospital(R.drawable.bs_nguyensyduc,
-                "284 Cống Quỳnh, Quận 1, TP.HCM", "Bệnh viện Từ Dũ"));
+        hospitalList.add(new Hospital(R.drawable.logo_pk_y_duc,
+                "321 Đường Võ Văn Kiệt, Quận Bình Thạnh, TP. Hồ Chí Minh", "Phòng khám Y Đức"));
+        hospitalList.add(new Hospital(R.drawable.logo_bv_da_khoa_hoang_gia,
+                " 567 Đường Trần Hưng Đạo, Quận 3, TP. Hồ Chí Minh", "Bệnh viện Đa khoa Hoàng Gia"));
+        hospitalList.add(new Hospital(R.drawable.logo_pk_chuyen_khoa_nv,
+                "890 Đường Phan Xích Long, Quận Phú Nhuận, TP. Hồ Chí Minh", "Phòng khám Chuyên khoa Nam Việt"));
+        hospitalList.add(new Hospital(R.drawable.logo_bv_qt_viet_my,
+                "112 Đường Lý Thường Kiệt, Quận Tân Bình, TP. Hồ Chí Minh", "Bệnh viện Quốc tế Việt Mỹ"));
+        hospitalList.add(new Hospital(R.drawable.logo_pkdk_tam_an,
+                "789 Đường Lê Văn Lương, Quận 7, TP. Hồ Chí Minh", "Phòng khám Đa khoa Tâm An"));
+        hospitalList.add(new Hospital(R.drawable.logo_bv_dong_a,
+                "456 Đường Quang Trung, Quận Gò Vấp, TP. Hồ Chí Minh", "Bệnh viện Chấn thương Chỉnh hình Đông Á"));
         // Khởi tạo danh sách đã lọc
         filteredHospitalList = new ArrayList<>(hospitalList);
 
