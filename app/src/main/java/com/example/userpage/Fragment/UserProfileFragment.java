@@ -12,13 +12,13 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import com.example.userpage.AccountActivity;
-import com.example.userpage.EditProfileActivity;
 import com.example.userpage.HealthActivity;
 import com.example.userpage.LichKhamActivity;
 import com.example.userpage.OrderHistoryActivity;
 import com.example.userpage.PolicyActivity;
 import com.example.userpage.R;
 import com.example.userpage.SettingAplicationActivity;
+import com.example.userpage.EditProfileActivity;
 import com.example.userpage.databinding.FragmentUserProfileBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,10 +57,9 @@ public class UserProfileFragment extends Fragment {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == getActivity().RESULT_OK && result.getData() != null) {
-                        // Lấy username thay vì fullName
-                        String username = result.getData().getStringExtra("USERNAME");
-                        if (username != null) {
-                            binding.tvProfileName.setText(username); // Hiển thị username
+                        String fullName = result.getData().getStringExtra("FULL_NAME");
+                        if (fullName != null) {
+                            binding.tvProfileName.setText(fullName);
                         }
                         String imageUriStringResult = result.getData().getStringExtra("IMAGE_URI");
                         if (imageUriStringResult != null) {
@@ -107,17 +106,17 @@ public class UserProfileFragment extends Fragment {
                     return;
                 }
 
-                // Truy vấn users/clientX để lấy fullName
+                // Truy vấn users/clientX để lấy username
                 DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(clientKey);
                 userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot userSnapshot) {
                         if (userSnapshot.exists()) {
-                            String fullName = userSnapshot.child("fullName").getValue(String.class);
-                            if (fullName != null) {
-                                binding.tvProfileName.setText(fullName);
+                            String username = userSnapshot.child("username").getValue(String.class);
+                            if (username != null) {
+                                binding.tvProfileName.setText(username);
                             } else {
-                                Toast.makeText(getActivity(), "Không tìm thấy Họ và Tên!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), "Không tìm thấy username!", Toast.LENGTH_LONG).show();
                             }
                         } else {
                             Toast.makeText(getActivity(), "Không tìm thấy dữ liệu người dùng!", Toast.LENGTH_LONG).show();

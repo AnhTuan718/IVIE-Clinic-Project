@@ -7,21 +7,19 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.userpage.Admin.AdminDashboardActivity;
-import com.example.userpage.Doctor.DoctorMainActivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.userpage.NavigationActivity;
 import com.example.userpage.R;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,40 +34,35 @@ public class LoginActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefs";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
     private static final String KEY_USER_EMAIL = "userEmail";
-    private static final String KEY_USER_ROLE = "userRole";
-    private static final String KEY_CLIENT_KEY = "clientKey";
 
     private EditText etUsername, etPassword;
-    private MaterialButton btnLogin;
-    private TextView tvGoToRegister, tvForgotPassword;
-    private ImageView ivGoogleLogin, ivFacebookLogin;
+    private Button btnLogin;
+    private TextView tvGoToRegister;
     private ProgressBar progressBar;
 
     private DatabaseReference databaseReference;
     private DatabaseReference emailToClientKeyRef;
     private FirebaseAuth mAuth;
-    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "LoginActivity onCreate started");
         setContentView(R.layout.activity_login);
-        Log.d(TAG, "LoginActivity layout set");
 
+        // Kiểm tra xem người dùng đã đăng nhập chưa
         if (isUserLoggedIn()) {
             navigateToMainScreen();
             return;
         }
 
+        // Khởi tạo Firebase Database và Authentication
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         emailToClientKeyRef = FirebaseDatabase.getInstance().getReference("emailToClientKey");
         mAuth = FirebaseAuth.getInstance();
-        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
+        // Ánh xạ các thành phần giao diện
         initializeViews();
         setupListeners();
-        Log.d(TAG, "LoginActivity onCreate completed");
     }
 
     private void initializeViews() {
@@ -77,37 +70,30 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvGoToRegister = findViewById(R.id.tvGoToRegister);
-        tvForgotPassword = findViewById(R.id.tvForgotPassword);
-        ivGoogleLogin = findViewById(R.id.ivGoogleLogin);
-        ivFacebookLogin = findViewById(R.id.ivFacebookLogin);
         progressBar = findViewById(R.id.progressBar);
+
+        etUsername.setHint("Email");
     }
 
     private void setupListeners() {
-        btnLogin.setOnClickListener(view -> validateAndLogin());
-
-        tvGoToRegister.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateAndLogin();
+            }
         });
 
-        tvForgotPassword.setOnClickListener(view -> {
-            // TODO: Xử lý quên mật khẩu (có thể thêm sau)
-            Toast.makeText(this, "Chức năng quên mật khẩu đang được phát triển!", Toast.LENGTH_SHORT).show();
-        });
-
-        ivGoogleLogin.setOnClickListener(view -> {
-            // TODO: Xử lý đăng nhập bằng Google (có thể thêm sau)
-            Toast.makeText(this, "Đăng nhập bằng Google đang được phát triển!", Toast.LENGTH_SHORT).show();
-        });
-
-        ivFacebookLogin.setOnClickListener(view -> {
-            // TODO: Xử lý đăng nhập bằng Facebook (có thể thêm sau)
-            Toast.makeText(this, "Đăng nhập bằng Facebook đang được phát triển!", Toast.LENGTH_SHORT).show();
+        tvGoToRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
     private boolean isUserLoggedIn() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         return prefs.getBoolean(KEY_IS_LOGGED_IN, false);
     }
 
@@ -120,12 +106,12 @@ public class LoginActivity extends AppCompatActivity {
         etPassword.setError(null);
 
         boolean hasError = false;
-        if (email.isEmpty()) {
+        if (TextUtils.isEmpty(email)) {
             etUsername.setError("Vui lòng nhập email");
             hasError = true;
         }
 
-        if (password.isEmpty()) {
+        if (TextUtils.isEmpty(password)) {
             etPassword.setError("Vui lòng nhập mật khẩu");
             hasError = true;
         }
@@ -180,17 +166,9 @@ public class LoginActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onDataChange(DataSnapshot userSnapshot) {
                                                     if (userSnapshot.exists()) {
-                                                        // Lấy role từ dữ liệu người dùng
-                                                        String role = userSnapshot.child("role").getValue(String.class);
-                                                        if (role != null) {
-                                                            Log.d(TAG, "Đăng nhập thành công với role: " + role);
-                                                            saveLoginState(email, role, clientKey);
-                                                            navigateToMainScreen(role);
-                                                        } else {
-                                                            progressBar.setVisibility(View.GONE);
-                                                            Log.e(TAG, "Không tìm thấy role trong dữ liệu người dùng");
-                                                            Toast.makeText(LoginActivity.this, "Không tìm thấy vai trò người dùng!", Toast.LENGTH_LONG).show();
-                                                        }
+                                                        Log.d(TAG, "Đăng nhập thành công");
+                                                        saveLoginState(email);
+                                                        navigateToMainScreen();
                                                     } else {
                                                         progressBar.setVisibility(View.GONE);
                                                         Log.e(TAG, "Không tìm thấy dữ liệu người dùng trong cơ sở dữ liệu");
@@ -238,72 +216,19 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void saveLoginState(String email, String role, String clientKey) {
+    private void saveLoginState(String email) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(KEY_IS_LOGGED_IN, true);
         editor.putString(KEY_USER_EMAIL, email);
-        editor.putString(KEY_USER_ROLE, role);
-        editor.putString(KEY_CLIENT_KEY, clientKey);
         editor.apply();
     }
 
     private void navigateToMainScreen() {
-        String role = prefs.getString(KEY_USER_ROLE, null);
-        navigateToMainScreen(role);
-    }
-
-    private void navigateToMainScreen(String role) {
-        Intent intent;
-        if (role == null) {
-            Toast.makeText(this, "Không tìm thấy vai trò người dùng!", Toast.LENGTH_LONG).show();
-            mAuth.signOut();
-            prefs.edit().clear().apply();
-            return;
-        }
-
-        switch (role) {
-            case "user":
-                intent = new Intent(LoginActivity.this, NavigationActivity.class);
-                intent.putExtra("SELECTED_TAB", R.id.nav_home); // Chuyển đến tab TrangChuFragment
-                break;
-            case "doctor":
-                intent = new Intent(LoginActivity.this, DoctorMainActivity.class);
-                break;
-            case "admin":
-                intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
-                break;
-            default:
-                Toast.makeText(this, "Vai trò không hợp lệ! Chỉ bệnh nhân, bác sĩ và quản trị viên được phép đăng nhập.", Toast.LENGTH_LONG).show();
-                mAuth.signOut();
-                prefs.edit().clear().apply();
-                return;
-        }
-
+        Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
+        intent.putExtra("SELECTED_TAB", R.id.nav_home);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         finish();
     }
-    private void checkUserRole(String email, String clientKey) {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(clientKey);
-
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String role = dataSnapshot.child("role").getValue(String.class);
-                    Log.d("DEBUG_ROLE", "User role: " + role);
-                    Log.d("DEBUG_ROLE", "Client key: " + clientKey);
-                } else {
-                    Log.d("DEBUG_ROLE", "User data not found");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.e("DEBUG_ROLE", "Error: " + error.getMessage());
-            }
-        });
-    }
-
 }

@@ -15,51 +15,33 @@
 
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="fitCenter"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_backicon"
-            app:tint="#FFFFFF"
-            android:contentDescription="@string/back_button"/>
+            app:tint="#FFFFFF" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/schedule"
             android:textColor="#FFFFFF"
-            android:textSize="23sp"
-            android:textStyle="bold"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Tab buttons for Lịch khám and Lịch tái khám -->
-    <LinearLayout
+    <!-- Doctor info (if needed) -->
+    <TextView
+        android:id="@+id/tv_doctor_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp">
-
-        <Button
-            android:id="@+id/btnAppointment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/tab_button_selector"
-            android:text="Lịch khám"
-            android:textColor="@color/tab_text_selector" />
-
-        <Button
-            android:id="@+id/btnFollowup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/tab_button_selector"
-            android:text="Lịch tái khám"
-            android:textColor="@color/tab_text_selector" />
-    </LinearLayout>
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:textColor="#333333" />
 
     <!-- Tab Layout -->
     <com.google.android.material.tabs.TabLayout

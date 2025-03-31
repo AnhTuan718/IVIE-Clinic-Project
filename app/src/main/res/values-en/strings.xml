@@ -35,7 +35,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="about_ivie_content">
-        The IVIE - Doctor app, formerly known as ISOFTCARE, has been accompanying users in the field of digital healthcare with the mission: “Building a comprehensive healthcare ecosystem, connecting Vietnamese doctors, enabling people to take care of their health anytime, anywhere.” With standout features such as priority appointment booking, online consultation, expert QA, lifetime health record management, and express medicine purchase and delivery.
+        The IVIE - Doctor app, formerly known as ISOFTCARE, has been accompanying users in the field of digital healthcare with the mission: “Building a comprehensive healthcare ecosystem, connecting Vietnamese doctors, enabling people to take care of their health anytime, anywhere.” With standout features such as priority appointment booking, online consultation, expert Q&amp;A, lifetime health record management, and express medicine purchase and delivery.
 
         To date, the platform has reached over 60+ medical facilities, more than 1.5 million users, major hospitals such as the National Lung Hospital, Viet Duc Friendship Hospital, E Hospital, Thu Cuc TCI Healthcare System, Da Nang 199 Hospital, and the Central Dermatology Hospital, with over 3,000+ doctors participating and more than 100+ pharmacies on the app. All aimed at becoming the leading platform in the digital healthcare industry.
 
@@ -104,6 +104,7 @@
     <string name="no_appointment_data">There are currently no appointments in this category.</string>
     <string name="no_order_data">You don’t have any orders in this category yet.</string>
 
+
     <string name="doctor_price_format">%1$s %2$s %3$s</string>
     <string name="doctor_specialty_label">Specialty:</string>
     <string name="doctor_price_label">Consultation Fee:</string>
@@ -117,49 +118,6 @@
     <string name="address_label">Address:</string>
     <string name="direct_consultation_label">Direct Consultation</string>
 
-    <!-- Medicine Management -->
-    <string name="medicine_management_title">Drug Management</string>
-    <string name="add_medicine">Add new medicine</string>
-    <string name="medicine_detail">Drug details</string>
-    <string name="error_load_medicines">Error when downloading the drug list</string>
-    <string name="medicine_name_placeholder">Drug name</string>
-    <string name="medicine_description_placeholder">Description</string>
-    <string name="medicine_image">Medicine Image</string>
-    <string name="medicine_price_placeholder">Price</string>
-    <string name="medicine_status_placeholder">Status</string>
-    <string name="medicine_name_hint">Enter the drug name</string>
-    <string name="medicine_description_hint">Enter the description</string>
-
-    <!-- Doctor Information -->
-    <string name="doctor_image">Doctor Image</string>
-    <string name="doctor_name_placeholder">Doctor Name</string>
-    <string name="doctor_workplace_placeholder">Workplace</string>
-    <string name="doctor_specialization_placeholder">Specialization</string>
-    <string name="consult_now">Consult Now</string>
-    <string name="doctor_management_title">Doctor Management</string>
-    <string name="add_doctor">Add New Doctor</string>
-    <string name="error_load_doctors">Error loading doctor list</string>
-    <string name="confirm_delete_title">Confirm Deletion</string>
-    <string name="confirm_delete_message">Are you sure you want to delete doctor %s?</string>
-    <string name="delete">Delete</string>
-    <string name="cancel">Cancel</string>
-    <string name="delete_doctor_success">Doctor deleted successfully</string>
-    <string name="delete_doctor_error">Error deleting doctor: %s</string>
-    <string name="doctor_online_consultation_placeholder">Online Consultation Location</string>
-    <string name="doctor_experience1_placeholder">Experience 1</string>
-    <string name="doctor_experience2_placeholder">Experience 2</string>
-    <string name="doctor_clinic_address_title">Clinic Address</string>
-    <string name="doctor_clinic_address_placeholder">Clinic Address</string>
-    <string name="consult_online">Online Consultation</string>
-
-    <string name="doctor_name_hint">Doctor Name</string>
-    <string name="doctor_specialization_hint">Specialization</string>
-    <string name="doctor_experience1_hint">Experience 1</string>
-    <string name="doctor_experience2_hint">Experience 2</string>
-    <string name="doctor_workplace_hint">Workplace</string>
-    <string name="doctor_online_consultation_hint">Online Consultation Location</string>
-    <string name="doctor_clinic_address_hint">Clinic Address</string>
-    <string name="save_profile">Save Profile</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

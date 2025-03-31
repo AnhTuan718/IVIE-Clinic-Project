@@ -205,37 +205,30 @@ public class RegisterActivity extends AppCompatActivity {
                                     String clientKey = "client" + counter;
 
                                     // Lưu userCounter mới
-                                    counterReference.setValue(counter)
-                                            .addOnCompleteListener(counterTask -> {
-                                                if (counterTask.isSuccessful()) {
-                                                    // Lưu ánh xạ email -> clientKey trước
+                                    counterReference.setValue(counter);
+
+                                    // Lưu dữ liệu người dùng vào users/clientX
+                                    User user = new User(username, email, phone, password);
+                                    databaseReference.child(clientKey).setValue(user)
+                                            .addOnCompleteListener(dbTask -> {
+                                                if (dbTask.isSuccessful()) {
+                                                    // Lưu ánh xạ email -> clientKey
                                                     String emailKey = email.replace(".", ",");
                                                     emailToClientKeyRef.child(emailKey).setValue(clientKey)
                                                             .addOnCompleteListener(emailTask -> {
+                                                                progressBar.setVisibility(View.GONE);
                                                                 if (emailTask.isSuccessful()) {
-                                                                    // Sau khi lưu emailToClientKey thành công, lưu dữ liệu người dùng vào users/clientX
-                                                                    User user = new User(username, email, phone, password);
-                                                                    databaseReference.child(clientKey).setValue(user)
-                                                                            .addOnCompleteListener(dbTask -> {
-                                                                                progressBar.setVisibility(View.GONE);
-                                                                                if (dbTask.isSuccessful()) {
-                                                                                    Log.d(TAG, "Đăng ký thành công với key: " + clientKey);
-                                                                                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                                                                                    navigateToLogin();
-                                                                                } else {
-                                                                                    String errorMessage = dbTask.getException() != null ? dbTask.getException().getMessage() : "Lỗi khi lưu dữ liệu";
-                                                                                    hideProgressAndShowError("Đăng ký thất bại: " + errorMessage);
-                                                                                }
-                                                                            });
+                                                                    Log.d(TAG, "Đăng ký thành công với key: " + clientKey);
+                                                                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                                                                    navigateToLogin();
                                                                 } else {
-                                                                    progressBar.setVisibility(View.GONE);
                                                                     String errorMessage = emailTask.getException() != null ? emailTask.getException().getMessage() : "Lỗi khi lưu ánh xạ email";
                                                                     hideProgressAndShowError("Đăng ký thất bại: " + errorMessage);
                                                                 }
                                                             });
                                                 } else {
                                                     progressBar.setVisibility(View.GONE);
-                                                    String errorMessage = counterTask.getException() != null ? counterTask.getException().getMessage() : "Lỗi khi cập nhật userCounter";
+                                                    String errorMessage = dbTask.getException() != null ? dbTask.getException().getMessage() : "Lỗi khi lưu dữ liệu";
                                                     hideProgressAndShowError("Đăng ký thất bại: " + errorMessage);
                                                 }
                                             });
@@ -271,6 +264,7 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
     }
 
+    // Trong RegisterActivity.java
     public static class User {
         public String username;
         public String email;
@@ -297,6 +291,7 @@ public class RegisterActivity extends AppCompatActivity {
             this.password = password;
         }
 
+        // Constructor mới để lưu thông tin từ EditProfileActivity
         public User(String username, String email, String phone, String password,
                     String fullName, String dateOfBirth, String gender, String idNumber,
                     String address, String street, String ethnicity, String nationality, String job) {

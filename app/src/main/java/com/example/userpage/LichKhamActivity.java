@@ -1,11 +1,12 @@
 package com.example.userpage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,11 +22,8 @@ public class LichKhamActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private ImageButton btnBack;
-    private Button btnAppointment, btnFollowup;
+    private TextView tvDoctorInfo;
 
-    private boolean isFollowUpMode = false; // Biến trạng thái
-
-    // Danh sách tab khi ở chế độ Lịch khám
     private final String[] tabs = new String[]{"Chờ duyệt", "Đã duyệt", "Đang khám", "Hoàn thành", "Quá hẹn", "Đã hủy"};
 
     @Override
@@ -36,60 +34,50 @@ public class LichKhamActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         btnBack = findViewById(R.id.btnBack);
-        btnAppointment = findViewById(R.id.btnAppointment);
-        btnFollowup = findViewById(R.id.btnFollowup);
+        tvDoctorInfo = findViewById(R.id.tv_doctor_info);
 
-        setUpViewPager(false);
+        // Nhận dữ liệu từ Intent
+        Intent intent = getIntent();
+        String doctorName = intent.getStringExtra("doctor_name");
+        String doctorSpecialty = intent.getStringExtra("doctor_specialty");
+        if (doctorName != null && doctorSpecialty != null) {
+            tvDoctorInfo.setText("Đặt lịch với: " + doctorName + " - " + doctorSpecialty);
+        } else {
+            tvDoctorInfo.setText("Không có thông tin bác sĩ");
+        }
+
+        setUpViewPager();
 
         btnBack.setOnClickListener(v -> finish());
-
-        btnAppointment.setOnClickListener(v -> {
-            if (isFollowUpMode) {
-                isFollowUpMode = false;
-                setUpViewPager(false);
-            }
-        });
-
-        // Xử lý nút "Lịch tái khám"
-        btnFollowup.setOnClickListener(v -> {
-            if (!isFollowUpMode) {
-                isFollowUpMode = true;
-                setUpViewPager(true);
-            }
-        });
     }
 
-    private void setUpViewPager(boolean isFollowUp) {
-        OrderTabAdapter adapter = new OrderTabAdapter(this, isFollowUp);
+    private void setUpViewPager() {
+        OrderTabAdapter adapter = new OrderTabAdapter(this);
         viewPager.setAdapter(adapter);
 
-        if (isFollowUp) {
-            tabLayout.setVisibility(View.GONE); // Ẩn tab khi là Lịch tái khám
-        } else {
-            tabLayout.setVisibility(View.VISIBLE);
-            new TabLayoutMediator(tabLayout, viewPager,
-                    (tab, position) -> tab.setText(tabs[position])
-            ).attach();
-        }
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(tabs[position])).attach();
     }
 
+    // Adapter class
     private static class OrderTabAdapter extends FragmentStateAdapter {
-        private final boolean isFollowUp;
-
-        public OrderTabAdapter(FragmentActivity fragmentActivity, boolean isFollowUp) {
+        public OrderTabAdapter(FragmentActivity fragmentActivity) {
             super(fragmentActivity);
-            this.isFollowUp = isFollowUp;
         }
 
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            return isFollowUp ? new EmptyFragment() : new OrderTabFragment();
+            OrderTabFragment fragment = new OrderTabFragment();
+            Bundle args = new Bundle();
+            args.putInt("position", position);
+            fragment.setArguments(args);
+            return fragment;
         }
 
         @Override
         public int getItemCount() {
-            return isFollowUp ? 1 : 6;
+            return 6; // Number of tabs
         }
     }
 
@@ -98,16 +86,7 @@ public class LichKhamActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.layout_empty_state2, container, false);
-        }
-    }
-
-    // Fragment hiển thị "Không có dữ liệu"
-    public static class EmptyFragment extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.layout_no_data, container, false);
+            return inflater.inflate(R.layout.fragment_order_tab, container, false);
         }
     }
 }
