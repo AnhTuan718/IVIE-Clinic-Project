@@ -6,7 +6,7 @@
         android:title="Trang chủ" />
     <item
         android:id="@+id/nav_community"
-        android:icon="@drawable/ic_community"
+        android:icon="@drawable/ic_shopping"
         android:title="Mua hàng" />
     <item
         android:id="@+id/nav_notifications"

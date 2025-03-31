@@ -2,15 +2,14 @@ package com.example.userpage.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SearchView;
+
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -27,6 +26,9 @@ import com.example.userpage.R;
 import com.example.userpage.RecyclerViewInterface;
 import com.example.userpage.BSChuThiMinh;
 import com.example.userpage.BSNguyenHoangGiang;
+import com.example.userpage.Shopping.ProductDetailActivity;
+import com.example.userpage.Shopping.ShoppingFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,11 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
     private ViewPager2 mviewPager2;
     private RecyclerView doctorRecyclerView;
     private RecyclerView chuyenKhoaRecyclerView;
-    DoctorAdapter adapter;
+
+    private Handler handler = new Handler(Looper.getMainLooper()); //Handler để quản lý slide
+    private Runnable runnable; //thực hiện chuyển slide
+
+    private static final int AUTO_SLIDE_DELAY = 3000; // Thời gian chờ giữa các slide (3 giây)
     EditText edtTimKiem;
 
     @Override
@@ -50,8 +56,12 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
         View view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
         edtTimKiem = view.findViewById(R.id.edtTimKiem);
         mviewPager2 = view.findViewById(R.id.viewpager);
+
+        //khoi tao photoAdapter
         PhotoAdapter photoAdapter = new PhotoAdapter(getActivity(), getListPhoto());
         mviewPager2.setAdapter(photoAdapter);
+
+        setupAutoSlide();
 
         doctorRecyclerView = view.findViewById(R.id.doctorRecyclerView);
         chuyenKhoaRecyclerView = view.findViewById(R.id.chuyenKhoaRecyclerView);
@@ -74,7 +84,15 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
         doctorRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         DoctorAdapter adapter = new DoctorAdapter(this, doctorList);
         doctorRecyclerView.setAdapter(adapter);
-        //thiet lap chuc nang tim kiem
+        CardView shoppingCard = view.findViewById(R.id.shopping_card);
+        shoppingCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ShoppingFragment.class);
+                startActivity(intent);
+            }
+        });
+        //Click chuyen qua benh vien
         CardView hospitalCard = view.findViewById(R.id.hospital_card); // Đảm bảo thêm ID này trong XML
         hospitalCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +103,30 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
         });
         return view;
     }
+
+    private void setupAutoSlide() {
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                int currentItem = mviewPager2.getCurrentItem();
+                int totalItem = mviewPager2.getAdapter().getItemCount();
+                if (currentItem < totalItem - 1) {
+                    mviewPager2.setCurrentItem(currentItem + 1);
+                } else {
+                    mviewPager2.setCurrentItem(0); //Quay lại slide đầu tiên
+                }
+                handler.postDelayed(this, AUTO_SLIDE_DELAY); //Lặp lại sau 3 giây
+            }
+        };
+        handler.postDelayed(runnable, AUTO_SLIDE_DELAY);//Bắt đầu tự động chuyen slide
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        //Xóa runnable khi Fragment bị hủy để tránh memory Leak
+        handler.removeCallbacks(runnable);
+    }
+
     private List<Photo> getListPhoto() {
         List<Photo> list = new ArrayList<>();
         list.add(new Photo(R.drawable.quang_cao_ivie2));

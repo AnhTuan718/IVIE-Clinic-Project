@@ -138,7 +138,6 @@ public class UserProfileFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        binding.layoutOffer.setOnClickListener(v -> showToast("Ưu đãi của tôi"));
         binding.layoutAppointment.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), LichKhamActivity.class)));
         binding.layoutOrders.setOnClickListener(v ->

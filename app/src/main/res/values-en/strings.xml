@@ -117,7 +117,7 @@
     <string name="doctor_info_title">Doctor Information</string>
     <string name="address_label">Address:</string>
     <string name="direct_consultation_label">Direct Consultation</string>
-
+    <string name="cart">Cart</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
