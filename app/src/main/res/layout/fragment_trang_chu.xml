@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.TrangChuFragment">
+    tools:context="/Fragment/.TrangChuFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -13,7 +13,60 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+<<<<<<< HEAD
 
+=======
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/homeCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="5dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/green"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/txtHomeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="left"
+                    android:text="IVIE - BÁC SĨ ƠI"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtTimKiem"
+                    android:layout_width="372dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/bg_search_edt"
+                    android:gravity="center"
+                    android:hint="Nhập tìm bác sĩ ,bệnh viện"
+                    android:textColor="#fff"
+                    android:textColorHint="#B3ADAD"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="15dp" />
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +100,11 @@
 
                     <EditText
                         android:id="@+id/edtTimKiem"
+<<<<<<< HEAD
                         android:layout_width="match_parent"
+=======
+                        android:layout_width="372dp"
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                         android:layout_height="48dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
@@ -57,6 +114,10 @@
                         android:textColor="#fff"
                         android:textColorHint="#B3ADAD"
                         android:textSize="20sp" />
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -109,7 +170,10 @@
 
                 <!-- Menu Item 2 -->
                 <androidx.cardview.widget.CardView
+<<<<<<< HEAD
                     android:id="@+id/doctor_chat_card"
+=======
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -142,7 +206,10 @@
 
                 <!-- Menu Item 3 -->
                 <androidx.cardview.widget.CardView
+<<<<<<< HEAD
                     android:id="@+id/shopping_card"
+=======
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -175,7 +242,10 @@
 
                 <!-- Menu Item 4 -->
                 <androidx.cardview.widget.CardView
+<<<<<<< HEAD
                     android:id="@+id/appointment_card"
+=======
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -208,7 +278,10 @@
 
                 <!-- Menu Item 5 -->
                 <androidx.cardview.widget.CardView
+<<<<<<< HEAD
                     android:id="@+id/service_card"
+=======
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -241,7 +314,10 @@
 
                 <!-- Menu Item 6 -->
                 <androidx.cardview.widget.CardView
+<<<<<<< HEAD
                     android:id="@+id/schedule_card"
+=======
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -274,7 +350,10 @@
 
                 <!-- Menu Item 7 -->
                 <androidx.cardview.widget.CardView
+<<<<<<< HEAD
                     android:id="@+id/community_card"
+=======
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -283,10 +362,17 @@
                     app:layout_columnWeight="1">
 
                     <LinearLayout
+<<<<<<< HEAD
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+=======
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                         android:padding="8dp">
 
                         <ImageView
@@ -307,7 +393,10 @@
 
                 <!-- Menu Item 8 -->
                 <androidx.cardview.widget.CardView
+<<<<<<< HEAD
                     android:id="@+id/health_record_card"
+=======
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -342,8 +431,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/starView"
@@ -362,6 +450,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+<<<<<<< HEAD
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/doctorRecyclerView"
                 android:layout_width="match_parent"
@@ -370,6 +459,24 @@
                 android:layout_marginBottom="0dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_doctor" />
+=======
+            <LinearLayout
+                android:id="@+id/DoctorRV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/doctorRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_doctor" />
+            </LinearLayout>
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -387,7 +494,11 @@
                         android:id="@+id/starViewSpecialty"
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"
+<<<<<<< HEAD
                         android:layout_weight="0"
+=======
+                        android:layout_weight="1"
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                         android:src="@drawable/baseline_star_24" />
 
                     <TextView
@@ -406,16 +517,33 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginBottom="16dp"
+<<<<<<< HEAD
+=======
+                    android:orientation="horizontal"
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_chuyen_khoa" />
             </LinearLayout>
 
+<<<<<<< HEAD
             <!-- Consider removing or adjusting this oversized TextView -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Update"
                 android:visibility="gone" />
+=======
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="500dp"
+                    android:layout_height="500dp"
+                    android:text="Update" />
+            </LinearLayout>
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

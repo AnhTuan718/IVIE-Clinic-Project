@@ -99,6 +99,7 @@ Tính đến nay, nền tảng đã chạm tới hơn 60+ cơ sở y tế, hơn 
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+<<<<<<< HEAD
     <string name="no_appointment_data">Hiện tại không có cuộc hẹn nào trong danh mục này.</string>
     <string name="no_order_data">Bạn chưa có đơn hàng nào trong danh mục này.</string>
 
@@ -117,6 +118,8 @@ Tính đến nay, nền tảng đã chạm tới hơn 60+ cơ sở y tế, hơn 
     <string name="cart">Giỏ hàng</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+=======
+>>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -154,4 +157,6 @@ Tính đến nay, nền tảng đã chạm tới hơn 60+ cơ sở y tế, hơn 
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
