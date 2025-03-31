@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.userpage.Model.ChuyenKhoa;
 import com.example.userpage.R;
 import com.example.userpage.RecyclerViewInterface;
 import com.example.userpage.Model.Doctor;
