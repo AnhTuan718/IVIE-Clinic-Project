@@ -26,12 +26,7 @@ import com.example.userpage.R;
 import com.example.userpage.RecyclerViewInterface;
 import com.example.userpage.BSChuThiMinh;
 import com.example.userpage.BSNguyenHoangGiang;
-<<<<<<< HEAD
-import com.example.userpage.Shopping.ProductDetailActivity;
 import com.example.userpage.Shopping.ShoppingFragment;
-=======
-import com.example.userpage.Shopping.ProductListActivity;
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,11 +87,7 @@ public class TrangChuFragment extends Fragment implements RecyclerViewInterface 
         shoppingCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< HEAD
                 Intent intent = new Intent(getActivity(), ShoppingFragment.class);
-=======
-                Intent intent = new Intent(getActivity(), ProductListActivity.class);
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                 startActivity(intent);
             }
         });

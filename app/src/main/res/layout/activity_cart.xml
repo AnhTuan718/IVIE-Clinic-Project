@@ -8,11 +8,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:background="@color/green"
-=======
-        android:background="?attr/colorPrimary"
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
         android:padding="8dp">
 
         <LinearLayout

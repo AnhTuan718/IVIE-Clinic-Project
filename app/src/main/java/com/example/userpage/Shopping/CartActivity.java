@@ -30,12 +30,8 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
     private ImageButton backButton;
     private SharedPreferences sharedPreferences;
     private static final String CART_PREFS = "CartPrefs";
-<<<<<<< HEAD
     // Use the same key as in ProductDetailActivity
     private static final String CART_KEY = "Cart";
-=======
-    private static final String CART_KEY = "cart";
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
     private List<CartItem> cartItems;
     private CartAdapter cartAdapter;
 
@@ -78,8 +74,6 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
             updateTotalPrice();
         });
     }
-
-<<<<<<< HEAD
     @Override
     protected void onResume() {
         super.onResume();
@@ -93,9 +87,6 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
         cartAdapter.notifyDataSetChanged();
         updateTotalPrice();
     }
-
-=======
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
     private List<CartItem> getCartItems() {
         List<CartItem> items = new ArrayList<>();
         String cartJson = sharedPreferences.getString(CART_KEY, "[]");
@@ -104,12 +95,8 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
             for (int i = 0; i < cartArray.length(); i++) {
                 JSONObject item = cartArray.getJSONObject(i);
                 String name = item.getString("productName");
-<<<<<<< HEAD
                 double priceDouble = item.getDouble("price"); // Handle as double since Product uses double
                 int price = (int) priceDouble; // Convert to int for CartItem
-=======
-                int price = item.getInt("price");
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
                 int quantity = item.getInt("quantity");
                 int imageResource = item.getInt("imageResource");
                 items.add(new CartItem(name, price, quantity, imageResource));

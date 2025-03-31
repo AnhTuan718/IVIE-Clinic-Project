@@ -45,45 +45,12 @@
 
         <!-- Appointment Activities -->
         <activity
-            android:name=".Chat.DoctorChatListActivity"
-            android:exported="false"
-            android:theme="@style/Theme.UserPage" />
-        <activity
-            android:name=".Chat.ChatActivity"
-            android:exported="false"
-            android:theme="@style/Theme.UserPage" /> <!-- Shopping Activities -->
-        <activity
             android:name=".Shopping.CartActivity"
             android:exported="false" />
-        <activity
-            android:name=".Shopping.ProductDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Shopping.ProductListActivity"
-            android:exported="false" /> <!-- Fragment Activities -->
-        <activity
-            android:name=".Fragment.BookingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Fragment.HospitalDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Fragment.BenhVien"
-            android:exported="false" /> <!-- Appointment Activities -->
         <activity
             android:name=".AppointmentActivity"
             android:exported="false"
             android:theme="@style/Theme.UserPage" />
-        <activity
-            android:name=".AppointmentBookingActivity"
-            android:exported="false"
-<<<<<<< HEAD
-            android:theme="@style/Theme.UserPage" /> <!-- Doctor Activities (removed duplicates) -->
-=======
-            android:theme="@style/Theme.UserPage" />
-
-        <!-- Doctor Activities (removed duplicates) -->
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
         <activity
             android:name=".BSChuThiMinh"
             android:exported="false"
@@ -91,13 +58,8 @@
         <activity
             android:name=".BSNguyenHoangGiang"
             android:exported="false"
-<<<<<<< HEAD
             android:theme="@style/Theme.UserPage" /> <!-- Other Activities -->
-=======
-            android:theme="@style/Theme.UserPage" />
 
-        <!-- Other Activities -->
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
         <activity
             android:name=".ProfileActivity"
             android:exported="false"

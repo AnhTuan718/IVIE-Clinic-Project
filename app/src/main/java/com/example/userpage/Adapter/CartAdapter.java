@@ -5,26 +5,20 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
+
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-=======
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.userpage.Model.CartItem;
-<<<<<<< HEAD
-=======
-
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
 import com.example.userpage.R;
 
 import org.json.JSONArray;
@@ -38,11 +32,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private List<CartItem> cartItems;
     private SharedPreferences sharedPreferences;
     private static final String CART_PREFS = "CartPrefs";
-<<<<<<< HEAD
     private static final String CART_KEY = "Cart";
-=======
-    private static final String CART_KEY = "cart";
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
     private OnCartUpdateListener onCartUpdateListener;
 
     public interface OnCartUpdateListener {
@@ -87,23 +77,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 onCartUpdateListener.onCartUpdated();
             }
         });
-<<<<<<< HEAD
 
         // Xử lý nút xóa sản phẩm
         holder.deleteButton.setOnClickListener(v -> {
             removeItem(position);
             Toast.makeText(context, "Đã xóa " + cartItem.getProductName() + " khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
         });
-=======
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
     }
 
     @Override
     public int getItemCount() {
         return cartItems.size();
     }
-
-<<<<<<< HEAD
     // Phương thức xóa item
     private void removeItem(int position) {
         if (position >= 0 && position < cartItems.size()) {
@@ -115,8 +100,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         }
     }
 
-=======
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
     private void updateCartInPrefs() {
         JSONArray cartArray = new JSONArray();
         for (CartItem item : cartItems) {
@@ -140,10 +123,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         ImageView cartItemImage;
         TextView cartItemName, cartItemPrice, quantityText;
         ImageButton increaseButton, decreaseButton;
-<<<<<<< HEAD
         ImageButton deleteButton;
-=======
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -153,14 +133,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             quantityText = itemView.findViewById(R.id.quantityText);
             increaseButton = itemView.findViewById(R.id.increaseButton);
             decreaseButton = itemView.findViewById(R.id.decreaseButton);
-<<<<<<< HEAD
             deleteButton = itemView.findViewById(R.id.deleteButton);
         }
     }
 }
-=======
-        }
-    }
-}
 
->>>>>>> 0793d553dc322277af673037e3e43d981c0bde03
+
