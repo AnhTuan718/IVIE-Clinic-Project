@@ -3,6 +3,7 @@ package com.example.userpage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,23 +17,28 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class BSChuThiMinh extends AppCompatActivity {
 
+    private TextView doctorName; // Khai báo biến ở cấp độ class để sử dụng trong toàn bộ activity
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.bschuthiminh);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+
+        // Thiết lập padding cho layout chính
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (view, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Thiết lập Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Doctor info setup
         ImageView doctorImage = findViewById(R.id.doctor_image);
-        TextView doctorName = findViewById(R.id.doctor_name);
+        doctorName = findViewById(R.id.doctor_name); // Gán biến class
         TextView doctorRating = findViewById(R.id.doctor_rating);
         TextView doctorSpecialty = findViewById(R.id.doctor_specialty);
         TextView doctorPrice = findViewById(R.id.doctor_price);
@@ -45,7 +51,6 @@ public class BSChuThiMinh extends AppCompatActivity {
         TextView doctorInfoContent = findViewById(R.id.doctor_info_content);
         TextView clinicAddress = findViewById(R.id.clinic_address);
         TextView onlineAddress = findViewById(R.id.online_address);
-        TextView directConsultation = findViewById(R.id.direct_consultation);
 
         // Set data with string resources
         doctorName.setText("ThsBs Chu Thị Minh");
@@ -61,7 +66,6 @@ public class BSChuThiMinh extends AppCompatActivity {
         doctorInfoContent.setText("Bác sĩ Chu Thị Minh tốt nghiệp Đại học Y Dược TP.HCM, có hơn 10 năm kinh nghiệm trong lĩnh vực nội khoa.");
         clinicAddress.setText(getString(R.string.address_label) + " 123 Đường Láng Hạ, Quận Đống Đa, Hà Nội");
         onlineAddress.setText("Phòng B19 - Tổ hợp Y Tế Chất lượng cao Mediplus, 99 Tân Mai, Hoàng Mai, Thành Phố Hà Nội");
-        directConsultation.setText(getString(R.string.direct_consultation_label));
 
         // Nhận dữ liệu từ Intent (nếu có)
         Intent intent = getIntent();
@@ -71,23 +75,23 @@ public class BSChuThiMinh extends AppCompatActivity {
         if (specialty != null) doctorSpecialty.setText(getString(R.string.doctor_specialty_label) + " " + specialty);
 
         // Handle expandable section
-        doctorInfoTitle.setOnClickListener(v -> {
+        doctorInfoTitle.setOnClickListener(view -> {
             if (doctorInfoContent.getVisibility() == View.GONE) {
                 doctorInfoContent.setVisibility(View.VISIBLE);
-                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_collapse, 0); // Icon khi mở
+                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_collapse, 0);
             } else {
                 doctorInfoContent.setVisibility(View.GONE);
-                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand, 0); // Icon khi thu gọn
+                doctorInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand, 0);
             }
         });
 
         // Xử lý nút Back
         ImageButton btnBack = findViewById(R.id.btn_back);
-        btnBack.setOnClickListener(v -> finish());
+        btnBack.setOnClickListener(view -> finish());
 
         // Xử lý nút Share
         ImageButton btnShare = findViewById(R.id.btn_share);
-        btnShare.setOnClickListener(v -> {
+        btnShare.setOnClickListener(view -> {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             String shareText = getString(R.string.doctor_info_title) + ": " + doctorName.getText() + "\n" +
@@ -96,6 +100,17 @@ public class BSChuThiMinh extends AppCompatActivity {
                     getString(R.string.appointment_count_label) + ": " + appointmentCount.getText();
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
             startActivity(Intent.createChooser(shareIntent, "Chia sẻ qua"));
+        });
+
+        // Xử lý nút Đặt lịch
+        Button btnBookAppointment = findViewById(R.id.btn_book_appointment);
+        btnBookAppointment.setOnClickListener(view -> {
+            Intent bookIntent = new Intent(BSChuThiMinh.this, AppointmentActivity.class);
+            bookIntent.putExtra("doctor_name", doctorName.getText().toString());
+            bookIntent.putExtra("doctor_specialty", "Nội tổng quát");
+            bookIntent.putExtra("doctor_hospital", "Bệnh viện Tràng An");
+            bookIntent.putExtra("doctor_price", "300.000");
+            startActivity(bookIntent);
         });
     }
 }

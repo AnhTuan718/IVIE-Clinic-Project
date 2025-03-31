@@ -321,14 +321,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clinic_address_layout">
 
-        <TextView
-            android:id="@+id/direct_consultation"
+        <Button
+            android:id="@+id/btn_book_appointment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/direct_consultation_label"
+            android:backgroundTint="@color/green"
+            android:text="Đặt lịch khám"
             android:layout_gravity="center"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:backgroundTint="@color/green"/>
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
