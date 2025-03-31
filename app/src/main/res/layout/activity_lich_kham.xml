@@ -43,6 +43,15 @@
         android:textSize="16sp"
         android:textColor="#333333" />
 
+    <!-- Appointment Status -->
+    <TextView
+        android:id="@+id/tv_appointment_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:textColor="#333333" />
+
     <!-- Tab Layout -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"

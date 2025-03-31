@@ -2,6 +2,7 @@ package com.example.userpage;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -153,8 +154,13 @@ public class AppointmentActivity extends AppCompatActivity {
         if (appointmentId != null) {
             ref.child(appointmentId).setValue(appointment).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
+                    Intent intent = new Intent(AppointmentActivity.this, LichKhamActivity.class);
+                    intent.putExtra("appointment_status", "Chờ duyệt");
+                    intent.putExtra("appointment_id", appointmentId); // Thêm ID để có thể tìm nhanh
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish(); // Đóng màn hình hiện tại
                     Toast.makeText(this, "Đặt lịch thành công", Toast.LENGTH_SHORT).show();
-                    finish();
                 } else {
                     Toast.makeText(this, "Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }

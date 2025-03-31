@@ -1,6 +1,7 @@
 package com.example.userpage.Model;
 
 public class Appointment {
+    private String id; // Thêm trường id
     private String doctorName;
     private String status;
     private String date;
@@ -29,6 +30,8 @@ public class Appointment {
     }
 
     // Getters và Setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; } // Thêm setter cho id
     public String getDoctorName() { return doctorName; }
     public void setDoctorName(String doctorName) { this.doctorName = doctorName; }
     public String getStatus() { return status; }
