@@ -1,18 +1,18 @@
 package com.example.userpage.Model;
 
 public class Message {
-    private String content;
-    private boolean isUser; // true if sent by user, false if from doctor
+    private String text;
+    private boolean isUser;
     private String time;
 
-    public Message(String content, boolean isUser, String time) {
-        this.content = content;
+    public Message(String text, boolean isUser, String time) {
+        this.text = text;
         this.isUser = isUser;
         this.time = time;
     }
 
-    public String getContent() {
-        return content;
+    public String getText() {
+        return text;
     }
 
     public boolean isUser() {

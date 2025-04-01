@@ -10,8 +10,8 @@
         android:title="Mua hàng" />
     <item
         android:id="@+id/nav_notifications"
-        android:icon="@drawable/ic_notification"
-        android:title="Thông báo" />
+        android:icon="@drawable/ic_chat"
+        android:title="Nhắn Tin" />
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_person"

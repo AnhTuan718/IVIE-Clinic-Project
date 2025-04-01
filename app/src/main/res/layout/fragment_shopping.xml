@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F5F5F5">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="101dp"
-        android:background="@color/green">
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:padding="8dp"
+        android:elevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,56 +19,52 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <!-- Back Button -->
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:scaleType="fitCenter"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/shopping"
-                android:src="@drawable/ic_back_24" />
-
             <!-- Search Bar -->
-
-            <!-- Cart Button -->
             <EditText
                 android:id="@+id/searchBar"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:autofillHints=""
+                android:layout_marginHorizontal="8dp"
                 android:background="@drawable/search_background"
                 android:hint="Tìm kiếm sản phẩm"
-                android:padding="8dp" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="#B0B0B0"
+                android:textSize="16sp" />
 
+            <!-- Cart Button -->
             <ImageButton
                 android:id="@+id/cartButton"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/back_button"
-                android:src="@drawable/ic_shopping_cart" />
-
+                android:contentDescription="@string/shopping"
+                android:src="@drawable/ic_shopping_cart"
+                android:padding="8dp" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-
 
     <!-- ViewPager2 cho ảnh quảng cáo -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_margin="8dp"/>
+        android:layout_height="160dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        android:paddingHorizontal="16dp" />
 
     <!-- Product Grid -->
     <GridView
         android:id="@+id/productGrid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:numColumns="2"
-        android:verticalSpacing="8dp"
-        android:horizontalSpacing="8dp"
-        android:padding="8dp" />
-
+        android:verticalSpacing="12dp"
+        android:horizontalSpacing="12dp"
+        android:padding="16dp"
+        android:clipToPadding="false" />
 </LinearLayout>

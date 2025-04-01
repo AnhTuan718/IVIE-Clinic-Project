@@ -33,7 +33,7 @@ public class ShoppingFragment extends Fragment {
 
     private ViewPager2 viewPager;
     private EditText searchBar;
-    private ImageButton backButton, cartButton;
+    private ImageButton cartButton;
     private GridView productGrid;
     private Handler handler = new Handler(Looper.getMainLooper());
     private Runnable runnable;
@@ -48,7 +48,6 @@ public class ShoppingFragment extends Fragment {
         // Initialize views
         viewPager = view.findViewById(R.id.viewPager);
         searchBar = view.findViewById(R.id.searchBar);
-        backButton = view.findViewById(R.id.backButton);
         cartButton = view.findViewById(R.id.cartButton);
         productGrid = view.findViewById(R.id.productGrid);
 
@@ -56,13 +55,6 @@ public class ShoppingFragment extends Fragment {
         PhotoAdapter photoAdapter = new PhotoAdapter(getActivity(), getListPhoto());
         viewPager.setAdapter(photoAdapter);
         setupAutoSlide();
-
-        // Back button listener
-        backButton.setOnClickListener(v -> {
-            if (getActivity() != null) {
-                getActivity().onBackPressed();
-            }
-        });
 
         // Cart button listener
         cartButton.setOnClickListener(v -> {
@@ -182,7 +174,7 @@ public class ShoppingFragment extends Fragment {
         }
 
         @Override
-        public Product getItem(int position) { // Thay đổi từ Object sang Product
+        public Product getItem(int position) {
             return products.get(position);
         }
 

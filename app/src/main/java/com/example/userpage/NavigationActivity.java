@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.userpage.Chat.DoctorChatListFragment;
 import com.example.userpage.Database.LoginActivity;
 import com.example.userpage.Shopping.ShoppingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,8 +34,8 @@ public class NavigationActivity extends AppCompatActivity {
             } else if (itemId == R.id.nav_community) {
                 selectedFragment = new ShoppingFragment(); // Use ShoppingFragment
             } else if (itemId == R.id.nav_notifications) {
-                // Chưa xử lý
-                return true;
+                // Chat with Doctors section
+                selectedFragment = new DoctorChatListFragment();
             } else if (itemId == R.id.nav_profile) {
                 SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
                 boolean isLoggedIn = prefs.getBoolean(KEY_IS_LOGGED_IN, false);

@@ -1,70 +1,31 @@
 package com.example.userpage.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.userpage.Model.ChuyenKhoa;
+import com.example.userpage.Chat.ChatActivity;
+import com.example.userpage.Model.Doctor;
 import com.example.userpage.R;
 import com.example.userpage.RecyclerViewInterface;
-import com.example.userpage.Model.Doctor;
-
 
 import java.util.List;
-import java.util.Locale;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
 
     private final RecyclerViewInterface recyclerViewInterface;
-
     private List<Doctor> doctorList;
     private Context context;
 
-
-        // Constructor
     public DoctorAdapter(RecyclerViewInterface recyclerViewInterface, List<Doctor> doctorList) {
         this.recyclerViewInterface = recyclerViewInterface;
         this.doctorList = doctorList;
-    }
-
-    // Thêm phương thức để cập nhật danh sách
-    public void updateList(List<Doctor> newList) {
-        this.doctorList = newList;
-        notifyDataSetChanged();
-    }
-
-    // HospitalViewHolder
-    public static class DoctorViewHolder extends RecyclerView.ViewHolder {
-        ImageView doctorImage;
-        TextView doctorName;
-        TextView doctorWorkplace;
-        Button consultButton;
-
-        public DoctorViewHolder(@NonNull View itemView,RecyclerViewInterface recyclerViewInterface) {
-            super(itemView);
-            doctorImage = itemView.findViewById(R.id.doctorImage);
-            doctorName = itemView.findViewById(R.id.doctorName);
-            doctorWorkplace = itemView.findViewById(R.id.doctorWorkplace);
-            consultButton = itemView.findViewById(R.id.consultButton);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(recyclerViewInterface != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            recyclerViewInterface.onItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
     }
 
     @NonNull
@@ -81,18 +42,20 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         holder.doctorImage.setImageResource(doctor.getImageResId());
         holder.doctorName.setText(doctor.getName());
         holder.doctorWorkplace.setText(doctor.getWorkplace());
-        // xu ly searchView
+
+        // Xử lý sự kiện nhấn nút "Tư vấn ngay"
+        holder.consultButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ChatActivity.class);
+            intent.putExtra("DOCTOR_NAME", doctor.getName());
+            intent.putExtra("DOCTOR_WORKPLACE", doctor.getWorkplace());
+            intent.putExtra("DOCTOR_IMAGE", doctor.getImageResId());
+            context.startActivity(intent);
+        });
+
+        // Xử lý sự kiện nhấn vào toàn bộ item (nếu cần)
         holder.itemView.setOnClickListener(v -> {
             if (recyclerViewInterface != null) {
                 recyclerViewInterface.onItemClick(position);
-            }
-        });
-        // Xử lý sự kiện click nút "Tư vấn ngay"
-        holder.consultButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Tư vấn với " + doctor.getName(), Toast.LENGTH_SHORT).show();
-                // Thêm logic tư vấn thực tế tại đây nếu cần
             }
         });
     }
@@ -100,5 +63,25 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     @Override
     public int getItemCount() {
         return doctorList.size();
+    }
+
+    public void updateList(List<Doctor> newList) {
+        this.doctorList = newList;
+        notifyDataSetChanged();
+    }
+
+    static class DoctorViewHolder extends RecyclerView.ViewHolder {
+        ImageView doctorImage;
+        TextView doctorName;
+        TextView doctorWorkplace;
+        Button consultButton;
+
+        DoctorViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
+            super(itemView);
+            doctorImage = itemView.findViewById(R.id.doctorImage);
+            doctorName = itemView.findViewById(R.id.doctorName);
+            doctorWorkplace = itemView.findViewById(R.id.doctorWorkplace);
+            consultButton = itemView.findViewById(R.id.consultButton);
+        }
     }
 }

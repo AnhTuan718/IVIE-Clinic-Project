@@ -24,15 +24,10 @@
         <!-- Shopping Activities -->
         <activity
             android:name=".Shopping.CartActivity"
-            android:exported="false" />
+            android:exported="false" /> <!-- Appointment Activities -->
         <activity
             android:name=".Shopping.ProductDetailActivity"
             android:exported="false" />
-        <activity
-            android:name=".Shopping.ProductListActivity"
-            android:exported="false" />
-
-        <!-- Fragment Activities -->
         <activity
             android:name=".Fragment.BookingActivity"
             android:exported="false" />
@@ -41,11 +36,6 @@
             android:exported="false" />
         <activity
             android:name=".Fragment.BenhVien"
-            android:exported="false" />
-
-        <!-- Appointment Activities -->
-        <activity
-            android:name=".Shopping.CartActivity"
             android:exported="false" />
         <activity
             android:name=".AppointmentActivity"
@@ -59,7 +49,6 @@
             android:name=".BSNguyenHoangGiang"
             android:exported="false"
             android:theme="@style/Theme.UserPage" /> <!-- Other Activities -->
-
         <activity
             android:name=".ProfileActivity"
             android:exported="false"
@@ -117,6 +106,10 @@
             android:exported="false"
             android:theme="@style/Theme.UserPage" />
         <activity
+            android:name=".Chat.ChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.UserPage" />
+        <activity
             android:name=".AccountActivity"
             android:exported="false"
             android:theme="@style/Theme.UserPage" />
@@ -130,6 +123,7 @@
             android:theme="@style/Theme.UserPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

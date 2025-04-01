@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="120dp"
+    android:layout_width="100dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
@@ -13,23 +13,25 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/img_chuyenKhoa"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@drawable/stethoscope" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/stethoscope"
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/txt_TenKhoa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Tên chuyên khoa"
             android:textAlignment="center"
             android:textColor="#333333"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:maxLines="2"
-            android:ellipsize="end"/>
+            android:ellipsize="end" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

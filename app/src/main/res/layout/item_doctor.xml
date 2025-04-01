@@ -2,57 +2,66 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="160dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
     <LinearLayout
-        android:layout_width="180dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="12dp"
+        android:gravity="center">
 
         <!-- Ảnh bác sĩ -->
         <ImageView
             android:id="@+id/doctorImage"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/bs_chuthiminh"/>
+            android:src="@drawable/bs_chuthiminh"
+            android:background="@drawable/doctor_appointment" />
 
         <!-- Tên bác sĩ -->
         <TextView
             android:id="@+id/doctorName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="BS. Nguyễn Văn A"
+            android:text="BS. Chu Thị Minh"
             android:textColor="#333333"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center" />
 
         <!-- Nơi làm việc -->
         <TextView
             android:id="@+id/doctorWorkplace"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Bệnh viện Chợ Rẫy"
             android:textColor="#666666"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center" />
 
         <!-- Nút tư vấn ngay -->
         <Button
             android:id="@+id/consultButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="#4CAF50"
             android:text="Tư vấn ngay"
             android:textColor="@android:color/white"
-            android:textSize="14sp"/>
-
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:paddingHorizontal="8dp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
