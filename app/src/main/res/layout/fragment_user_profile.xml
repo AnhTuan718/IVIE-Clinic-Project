@@ -7,7 +7,6 @@
     android:background="#F8F9FB"
     tools:context=".Fragment.UserProfileFragment">
 
-    <!-- Scrollable Content -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -19,8 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <!-- Profile Section with gradient background -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/profileCard"
                 android:layout_width="match_parent"
@@ -387,8 +384,6 @@
                     </LinearLayout>
                 </GridLayout>
             </androidx.cardview.widget.CardView>
-
-            <!-- Settings Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -430,8 +425,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <!-- Thiết lập ứng dụng -->
                     <LinearLayout
                         android:id="@+id/layoutAppSettings"
                         android:layout_width="match_parent"
@@ -481,8 +474,6 @@
                         android:layout_marginStart="72dp"
                         android:layout_marginEnd="16dp"
                         android:background="#E0E0E0" />
-
-                    <!-- Tài khoản -->
                     <LinearLayout
                         android:id="@+id/layoutAccount"
                         android:layout_width="match_parent"
@@ -532,8 +523,6 @@
                         android:layout_marginStart="72dp"
                         android:layout_marginEnd="16dp"
                         android:background="#E0E0E0" />
-
-                    <!-- Chính sách và hỗ trợ -->
                     <LinearLayout
                         android:id="@+id/layoutPolicy"
                         android:layout_width="match_parent"
@@ -578,15 +567,11 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-            <!-- Add extra space at the bottom to ensure scrollable content doesn't overlap fixed elements -->
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="100dp" />
         </LinearLayout>
     </ScrollView>
-
-    <!-- Version Info with improved design -->
     <TextView
         android:id="@+id/tvVersion"
         android:layout_width="match_parent"
@@ -599,8 +584,6 @@
         android:textSize="14sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@id/hotlineLayout" />
-
-    <!-- Fixed Hotline with improved design -->
     <LinearLayout
         android:id="@+id/hotlineLayout"
         android:layout_width="match_parent"

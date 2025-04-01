@@ -43,16 +43,12 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        // Khởi tạo Firebase Database
         emailToClientKeyRef = FirebaseDatabase.getInstance().getReference("emailToClientKey");
         usersRef = FirebaseDatabase.getInstance().getReference("users");
 
         binding.btnBack.setOnClickListener(v -> finish());
 
         calendar = Calendar.getInstance();
-
-        // Initialize image picker launcher
         imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -80,13 +76,10 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         binding.btnSubmit.setOnClickListener(v -> handleFormSubmit());
-
-        // Load thông tin hiện tại của người dùng
         loadUserData();
     }
 
     private void loadUserData() {
-        // Lấy email từ SharedPreferences
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String email = prefs.getString("userEmail", null);
 
@@ -95,8 +88,6 @@ public class EditProfileActivity extends AppCompatActivity {
             finish();
             return;
         }
-
-        // Truy vấn emailToClientKey để tìm clientKey
         String emailKey = email.replace(".", ",");
         emailToClientKeyRef.child(emailKey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -104,14 +95,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     String clientKey = dataSnapshot.getValue(String.class);
                     if (clientKey != null) {
-                        // Truy vấn users/clientX để lấy thông tin hiện tại
                         usersRef.child(clientKey).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot userSnapshot) {
                                 if (userSnapshot.exists()) {
                                     RegisterActivity.User user = userSnapshot.getValue(RegisterActivity.User.class);
                                     if (user != null) {
-                                        // Hiển thị thông tin hiện tại lên giao diện
                                         if (user.fullName != null) binding.edtFullName.setText(user.fullName);
                                         if (user.phone != null) binding.edtPhoneNumber.setText(user.phone);
                                         if (user.dateOfBirth != null) binding.edtDob.setText(user.dateOfBirth);
@@ -211,7 +200,6 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void handleFormSubmit() {
-        // Lấy thông tin từ giao diện
         String fullName = binding.edtFullName.getText().toString().trim();
         String phone = binding.edtPhoneNumber.getText().toString().trim();
         String dateOfBirth = binding.edtDob.getText().toString().trim();
@@ -223,14 +211,11 @@ public class EditProfileActivity extends AppCompatActivity {
         String nationality = binding.spinnerNationality.getText().toString().trim();
         String job = binding.spinnerJob.getText().toString().trim();
 
-        // Kiểm tra các trường bắt buộc
         if (fullName.isEmpty() || phone.isEmpty() || dateOfBirth.isEmpty() || address.isEmpty() ||
                 ethnicity.isEmpty() || nationality.isEmpty() || job.isEmpty()) {
             showToast("Vui lòng nhập đầy đủ các thông tin bắt buộc (*)");
             return;
         }
-
-        // Lấy email từ SharedPreferences
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String email = prefs.getString("userEmail", null);
 
@@ -239,8 +224,6 @@ public class EditProfileActivity extends AppCompatActivity {
             finish();
             return;
         }
-
-        // Truy vấn emailToClientKey để tìm clientKey
         String emailKey = email.replace(".", ",");
         emailToClientKeyRef.child(emailKey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -248,19 +231,17 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     String clientKey = dataSnapshot.getValue(String.class);
                     if (clientKey != null) {
-                        // Truy vấn thông tin hiện tại của người dùng để giữ nguyên các trường không thay đổi
                         usersRef.child(clientKey).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot userSnapshot) {
                                 if (userSnapshot.exists()) {
                                     RegisterActivity.User existingUser = userSnapshot.getValue(RegisterActivity.User.class);
                                     if (existingUser != null) {
-                                        // Tạo đối tượng User mới với thông tin đã chỉnh sửa
                                         RegisterActivity.User updatedUser = new RegisterActivity.User(
-                                                existingUser.username, // Giữ nguyên username
-                                                existingUser.email,    // Giữ nguyên email
-                                                phone,                // Cập nhật số điện thoại
-                                                existingUser.password, // Giữ nguyên password
+                                                existingUser.username,
+                                                existingUser.email,
+                                                phone,
+                                                existingUser.password,
                                                 fullName,
                                                 dateOfBirth,
                                                 gender,
@@ -272,11 +253,9 @@ public class EditProfileActivity extends AppCompatActivity {
                                                 job
                                         );
 
-                                        // Lưu thông tin cập nhật vào Realtime Database
                                         usersRef.child(clientKey).setValue(updatedUser)
                                                 .addOnCompleteListener(task -> {
                                                     if (task.isSuccessful()) {
-                                                        // Trả về kết quả cho UserProfileFragment
                                                         Intent resultIntent = new Intent();
                                                         resultIntent.putExtra("FULL_NAME", fullName);
                                                         if (selectedImageUri != null) {

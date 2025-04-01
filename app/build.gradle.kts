@@ -37,17 +37,18 @@
 
     dependencies {
         implementation(platform("com.google.firebase:firebase-bom:33.11.0"))
-        implementation("com.google.firebase:firebase-database:20.3.0")
-        implementation("com.google.firebase:firebase-firestore:24.10.3")
-        implementation("com.github.bumptech.glide:glide:4.16.0")
-        implementation("com.google.firebase:firebase-database")
         implementation("com.google.firebase:firebase-auth")
+        implementation("com.google.firebase:firebase-database")
+        implementation("com.google.firebase:firebase-firestore")
         implementation("com.google.firebase:firebase-analytics")
 
+        // Các thư viện khác
+        implementation("com.github.bumptech.glide:glide:4.16.0")
         implementation("androidx.gridlayout:gridlayout:1.0.0")
         implementation("androidx.appcompat:appcompat:1.6.1")
         implementation("androidx.cardview:cardview:1.0.0")
         implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+        implementation("com.google.code.gson:gson:2.10.1")
         implementation("de.hdodenhof:circleimageview:3.1.0")
         implementation(libs.appcompat)
         implementation(libs.material)

@@ -22,7 +22,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
     private ImageButton btnBack;
 
-    // Tab titles
     private String[] tabs = new String[]{"Tất cả", "Đang xử lý", "Đã xác nhận", "Đang giao hàng",
             "Hoàn thành", "Đã hủy", "Yêu cầu mua thuốc"};
 
@@ -31,25 +30,16 @@ public class OrderHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
 
-        // Initialize views
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         btnBack = findViewById(R.id.btnBack);
-
-        // Set up ViewPager with tabs
         OrderTabAdapter adapter = new OrderTabAdapter(this);
         viewPager.setAdapter(adapter);
-
-        // Connect TabLayout with ViewPager2
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(tabs[position])
         ).attach();
-
-        // Back button click listener
         btnBack.setOnClickListener(v -> finish());
     }
-
-    // Adapter for the tabs
     private class OrderTabAdapter extends FragmentStateAdapter {
         public OrderTabAdapter(FragmentActivity fragmentActivity) {
             super(fragmentActivity);
@@ -68,12 +58,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
         }
     }
 
-    // Fragment for each tab
     public static class OrderTabFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            // Using the empty state layout for demonstration
             return inflater.inflate(R.layout.layout_empty_state, container, false);
         }
     }

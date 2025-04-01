@@ -1,7 +1,7 @@
 package com.example.userpage.Chat;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.userpage.Adapter.MessageAdapter;
 import com.example.userpage.Model.Message;
 import com.example.userpage.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,47 +31,43 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView doctorImage;
     private MessageAdapter messageAdapter;
     private List<Message> messages;
+    private SharedPreferences sharedPreferences;
+    private String doctorName;
+
+    private static final String PREFS_NAME = "ChatPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
-        // Initialize views
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         messageRecyclerView = findViewById(R.id.messageRecyclerView);
         messageInput = findViewById(R.id.messageInput);
         sendButton = findViewById(R.id.sendButton);
         backButton = findViewById(R.id.backButton);
         doctorNameTitle = findViewById(R.id.doctorNameTitle);
         doctorImage = findViewById(R.id.doctorImageChat);
-
-        // Set doctor info from intent
-        String doctorName = getIntent().getStringExtra("DOCTOR_NAME");
-        String doctorWorkplace = getIntent().getStringExtra("DOCTOR_WORKPLACE");
+        doctorName = getIntent().getStringExtra("DOCTOR_NAME");
         int doctorImageRes = getIntent().getIntExtra("DOCTOR_IMAGE", R.drawable.default_avatar);
 
         if (doctorName != null) {
             doctorNameTitle.setText(doctorName);
         }
         doctorImage.setImageResource(doctorImageRes);
+        messages = loadMessages(doctorName);
+        if (messages.isEmpty()) {
+            String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+            Message welcomeMessage = new Message("Xin chào, tôi có thể giúp gì cho bạn?", false, currentTime);
+            messages.add(welcomeMessage);
+        }
 
-        // Setup RecyclerView
-        messages = new ArrayList<>();
         messageAdapter = new MessageAdapter(messages);
         messageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         messageRecyclerView.setAdapter(messageAdapter);
-
-        // Thêm tin nhắn chào từ bác sĩ
-        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
-        Message welcomeMessage = new Message("Xin chào, tôi có thể giúp gì cho bạn?", false, currentTime);
-        messages.add(welcomeMessage);
-        messageAdapter.notifyItemInserted(messages.size() - 1);
         messageRecyclerView.scrollToPosition(messages.size() - 1);
 
-        // Back button
         backButton.setOnClickListener(v -> finish());
 
-        // Send button
         sendButton.setOnClickListener(v -> sendMessage());
     }
 
@@ -80,13 +78,35 @@ public class ChatActivity extends AppCompatActivity {
             String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
             Message newMessage = new Message(messageText, true, currentTime);
             messages.add(newMessage);
+            saveMessages(doctorName);
 
             // Update UI
             messageAdapter.notifyItemInserted(messages.size() - 1);
             messageRecyclerView.scrollToPosition(messages.size() - 1);
 
-            // Clear input
             messageInput.setText("");
         }
+    }
+
+    private void saveMessages(String doctorName) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(messages);
+        editor.putString("Messages_" + doctorName, json);
+        editor.apply();
+    }
+    private List<Message> loadMessages(String doctorName) {
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("Messages_" + doctorName, null);
+        if (json == null) {
+            return new ArrayList<>();
+        }
+        return gson.fromJson(json, new TypeToken<List<Message>>(){}.getType());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveMessages(doctorName);
     }
 }

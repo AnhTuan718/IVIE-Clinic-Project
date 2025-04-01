@@ -7,6 +7,7 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.userpage.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,14 +49,10 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        // Khởi tạo Firebase Database và Authentication
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         counterReference = FirebaseDatabase.getInstance().getReference("userCounter");
         emailToClientKeyRef = FirebaseDatabase.getInstance().getReference("emailToClientKey");
         mAuth = FirebaseAuth.getInstance();
-
-        // Ánh xạ các thành phần giao diện
         initializeViews();
         setupListeners();
     }
@@ -70,29 +68,19 @@ public class RegisterActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         cbTerms = findViewById(R.id.cbTerms);
         progressBar = findViewById(R.id.progressBar);
+        etRegUsername.setHint("Tên người dùng");
+        etRegEmail.setHint("Email");
+        etRegPhone.setHint("Số điện thoại");
+        etRegPassword.setHint("Mật khẩu");
+        etRegConfirmPassword.setHint("Xác nhận mật khẩu");
     }
 
     private void setupListeners() {
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                validateAndRegister();
-            }
-        });
+        btnRegister.setOnClickListener(view -> validateAndRegister());
 
-        tvGoToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToLogin();
-            }
-        });
+        tvGoToLogin.setOnClickListener(view -> navigateToLogin());
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToLogin();
-            }
-        });
+        btnBack.setOnClickListener(v -> navigateToLogin());
     }
 
     private void validateAndRegister() {
@@ -121,13 +109,16 @@ public class RegisterActivity extends AppCompatActivity {
         if (email.isEmpty()) {
             etRegEmail.setError("Vui lòng nhập email");
             hasError = true;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etRegEmail.setError("Email không hợp lệ");
+            hasError = true;
         }
 
         if (phone.isEmpty()) {
             etRegPhone.setError("Vui lòng nhập số điện thoại");
             hasError = true;
         } else if (!isValidPhoneNumber(phone)) {
-            etRegPhone.setError("Số điện thoại không hợp lệ");
+            etRegPhone.setError("Số điện thoại không hợp lệ (9-11 chữ số)");
             hasError = true;
         }
 
@@ -181,13 +172,11 @@ public class RegisterActivity extends AppCompatActivity {
         Log.d(TAG, "Username: " + username);
 
         if (!isNetworkAvailable()) {
-            Toast.makeText(this, "Không có kết nối mạng. Vui lòng kiểm tra lại!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Không có kết nối mạng. Vui lòng kiểm tra Wi-Fi hoặc dữ liệu di động!", Toast.LENGTH_LONG).show();
             return;
         }
 
         progressBar.setVisibility(View.VISIBLE);
-
-        // Đăng ký người dùng với Firebase Authentication
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -203,11 +192,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                     counter++;
                                     String clientKey = "client" + counter;
-
-                                    // Lưu userCounter mới
                                     counterReference.setValue(counter);
-
-                                    // Lưu dữ liệu người dùng vào users/clientX
                                     User user = new User(username, email, phone, password);
                                     databaseReference.child(clientKey).setValue(user)
                                             .addOnCompleteListener(dbTask -> {
@@ -227,7 +212,6 @@ public class RegisterActivity extends AppCompatActivity {
                                                                 }
                                                             });
                                                 } else {
-                                                    progressBar.setVisibility(View.GONE);
                                                     String errorMessage = dbTask.getException() != null ? dbTask.getException().getMessage() : "Lỗi khi lưu dữ liệu";
                                                     hideProgressAndShowError("Đăng ký thất bại: " + errorMessage);
                                                 }
@@ -236,18 +220,34 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
-                                    progressBar.setVisibility(View.GONE);
                                     hideProgressAndShowError("Lỗi khi lấy userCounter: " + databaseError.getMessage());
                                 }
                             });
                         } else {
-                            progressBar.setVisibility(View.GONE);
                             hideProgressAndShowError("Lỗi: Không thể lấy userId");
                         }
                     } else {
-                        progressBar.setVisibility(View.GONE);
-                        String errorMessage = task.getException() != null ? task.getException().getMessage() : "Đăng ký thất bại";
-                        hideProgressAndShowError("Đăng ký thất bại: " + errorMessage);
+                        try {
+                            throw task.getException();
+                        } catch (FirebaseAuthException e) {
+                            String errorCode = e.getErrorCode();
+                            switch (errorCode) {
+                                case "ERROR_EMAIL_ALREADY_IN_USE":
+                                    hideProgressAndShowError("Email đã được sử dụng!");
+                                    break;
+                                case "ERROR_INVALID_EMAIL":
+                                    hideProgressAndShowError("Email không hợp lệ!");
+                                    break;
+                                case "ERROR_WEAK_PASSWORD":
+                                    hideProgressAndShowError("Mật khẩu quá yếu, cần ít nhất 6 ký tự!");
+                                    break;
+                                default:
+                                    hideProgressAndShowError("Đăng ký thất bại: " + e.getMessage());
+                                    break;
+                            }
+                        } catch (Exception e) {
+                            hideProgressAndShowError("Đăng ký thất bại: " + e.getMessage());
+                        }
                     }
                 });
     }
@@ -264,7 +264,6 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
     }
 
-    // Trong RegisterActivity.java
     public static class User {
         public String username;
         public String email;
@@ -281,7 +280,6 @@ public class RegisterActivity extends AppCompatActivity {
         public String job;
 
         public User() {
-            // Required empty constructor for Firebase
         }
 
         public User(String username, String email, String phone, String password) {
@@ -291,7 +289,6 @@ public class RegisterActivity extends AppCompatActivity {
             this.password = password;
         }
 
-        // Constructor mới để lưu thông tin từ EditProfileActivity
         public User(String username, String email, String phone, String password,
                     String fullName, String dateOfBirth, String gender, String idNumber,
                     String address, String street, String ethnicity, String nationality, String job) {

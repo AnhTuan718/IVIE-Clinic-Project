@@ -7,8 +7,9 @@
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -27,9 +28,6 @@
             android:exported="false" /> <!-- Appointment Activities -->
         <activity
             android:name=".Shopping.ProductDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Fragment.BookingActivity"
             android:exported="false" />
         <activity
             android:name=".Fragment.HospitalDetailActivity"

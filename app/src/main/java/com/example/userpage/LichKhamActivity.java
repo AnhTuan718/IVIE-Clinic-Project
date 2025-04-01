@@ -44,26 +44,18 @@ public class LichKhamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lich_kham);
 
-        // Ánh xạ các view
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         btnBack = findViewById(R.id.btnBack);
         tvDoctorInfo = findViewById(R.id.tv_doctor_info);
         tvAppointmentStatus = findViewById(R.id.tv_appointment_status);
-
-        // Thiết lập ViewPager và adapter
         setUpViewPager();
-
-        // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
         String appointmentStatus = intent.getStringExtra("appointment_status");
 
         if (appointmentStatus != null) {
-            // Hiển thị trạng thái
             tvAppointmentStatus.setVisibility(View.VISIBLE);
             tvAppointmentStatus.setText("Trạng thái: " + appointmentStatus);
-
-            // Chọn tab dựa trên trạng thái
             for (int i = 0; i < tabs.length; i++) {
                 if (tabs[i].equals(appointmentStatus)) {
                     viewPager.setCurrentItem(i);
@@ -71,7 +63,6 @@ public class LichKhamActivity extends AppCompatActivity {
                 }
             }
         } else {
-            // Mặc định hiển thị tab đầu tiên
             viewPager.setCurrentItem(0);
         }
 
@@ -104,85 +95,97 @@ public class LichKhamActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 6; // Number of tabs
+            return 6;
         }
-    }
 
-    // Fragment hiển thị danh sách tab
-    public static class OrderTabFragment extends Fragment {
-        private RecyclerView recyclerView;
-        private AppointmentAdapter adapter;
-        private List<Appointment> appointmentList;
-        private TextView tvEmpty;
+        // Fragment hiển thị danh sách tab
+        public static class OrderTabFragment extends Fragment {
+            private RecyclerView recyclerView;
+            private AppointmentAdapter adapter;
+            private List<Appointment> appointmentList;
+            private TextView tvEmpty;
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_order_tab, container, false);
-            recyclerView = view.findViewById(R.id.recyclerView);
-            tvEmpty = view.findViewById(R.id.tv_empty);
+            @Override
+            public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                     Bundle savedInstanceState) {
+                View view = inflater.inflate(R.layout.fragment_order_tab, container, false);
+                recyclerView = view.findViewById(R.id.recyclerView);
+                tvEmpty = view.findViewById(R.id.tv_empty);
 
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-            // Lấy vị trí tab
-            Bundle args = getArguments();
-            int position = args != null ? args.getInt("position", 0) : 0;
-            String status = "";
+                // Lấy vị trí tab
+                Bundle args = getArguments();
+                int position = args != null ? args.getInt("position", 0) : 0;
+                String status = "";
 
-            // Ánh xạ vị trí tab với trạng thái
-            switch (position) {
-                case 0: status = "Chờ duyệt"; break;
-                case 1: status = "Đã duyệt"; break;
-                case 2: status = "Đang khám"; break;
-                case 3: status = "Hoàn thành"; break;
-                case 4: status = "Quá hạn"; break;
-                case 5: status = "Đã hủy"; break;
+                // Ánh xạ vị trí tab với trạng thái
+                switch (position) {
+                    case 0:
+                        status = "Chờ duyệt";
+                        break;
+                    case 1:
+                        status = "Đã duyệt";
+                        break;
+                    case 2:
+                        status = "Đang khám";
+                        break;
+                    case 3:
+                        status = "Hoàn thành";
+                        break;
+                    case 4:
+                        status = "Quá hạn";
+                        break;
+                    case 5:
+                        status = "Đã hủy";
+                        break;
+                }
+
+                appointmentList = new ArrayList<>();
+                adapter = new AppointmentAdapter(appointmentList);
+                recyclerView.setAdapter(adapter);
+
+                // Đây là điểm quan trọng - tải dữ liệu theo trạng thái
+                loadAppointments(status);
+
+                return view;
             }
 
-            appointmentList = new ArrayList<>();
-            adapter = new AppointmentAdapter(appointmentList);
-            recyclerView.setAdapter(adapter);
+            private void loadAppointments(String status) {
+                if (getContext() == null) return;
 
-            // Đây là điểm quan trọng - tải dữ liệu theo trạng thái
-            loadAppointments(status);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("appointments");
+                ref.orderByChild("status").equalTo(status).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        appointmentList.clear();
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            Appointment appointment = ds.getValue(Appointment.class);
+                            if (appointment != null) {
+                                // Thêm ID để có thể thao tác với item sau này
+                                appointment.setId(ds.getKey());
+                                appointmentList.add(appointment);
+                            }
+                        }
 
-            return view;
-        }
+                        adapter.notifyDataSetChanged();
 
-        private void loadAppointments(String status) {
-            if (getContext() == null) return;
-
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("appointments");
-            ref.orderByChild("status").equalTo(status).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    appointmentList.clear();
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        Appointment appointment = ds.getValue(Appointment.class);
-                        if (appointment != null) {
-                            // Thêm ID để có thể thao tác với item sau này
-                            appointment.setId(ds.getKey());
-                            appointmentList.add(appointment);
+                        // Hiển thị thông báo nếu không có dữ liệu
+                        if (appointmentList.isEmpty()) {
+                            recyclerView.setVisibility(View.GONE);
+                            tvEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            recyclerView.setVisibility(View.VISIBLE);
+                            tvEmpty.setVisibility(View.GONE);
                         }
                     }
 
-                    adapter.notifyDataSetChanged();
-
-                    // Hiển thị thông báo nếu không có dữ liệu
-                    if (appointmentList.isEmpty()) {
-                        recyclerView.setVisibility(View.GONE);
-                        tvEmpty.setVisibility(View.VISIBLE);
-                    } else {
-                        recyclerView.setVisibility(View.VISIBLE);
-                        tvEmpty.setVisibility(View.GONE);
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getContext(), "Lỗi: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getContext(), "Lỗi: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                });
+            }
         }
     }
 }
