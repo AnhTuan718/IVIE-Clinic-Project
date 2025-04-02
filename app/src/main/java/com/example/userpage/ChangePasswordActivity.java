@@ -38,13 +38,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-
-        // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference("users");
         emailToClientKeyRef = FirebaseDatabase.getInstance().getReference("emailToClientKey");
-
-        // Check if user is logged in
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             Toast.makeText(this, "Vui lòng đăng nhập để tiếp tục!", Toast.LENGTH_LONG).show();
@@ -207,11 +203,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
         user.reauthenticate(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Update password in Firebase Authentication
                         user.updatePassword(newPassword)
                                 .addOnCompleteListener(updateTask -> {
                                     if (updateTask.isSuccessful()) {
-                                        // Update password in Realtime Database
                                         updatePasswordInDatabase(newPassword);
                                     } else {
                                         Toast.makeText(ChangePasswordActivity.this, "Lỗi: " + updateTask.getException().getMessage(), Toast.LENGTH_LONG).show();

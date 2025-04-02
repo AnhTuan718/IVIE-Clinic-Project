@@ -97,8 +97,6 @@ public class LichKhamActivity extends AppCompatActivity {
         public int getItemCount() {
             return 6;
         }
-
-        // Fragment hiển thị danh sách tab
         public static class OrderTabFragment extends Fragment {
             private RecyclerView recyclerView;
             private AppointmentAdapter adapter;
@@ -113,13 +111,9 @@ public class LichKhamActivity extends AppCompatActivity {
                 tvEmpty = view.findViewById(R.id.tv_empty);
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-                // Lấy vị trí tab
                 Bundle args = getArguments();
                 int position = args != null ? args.getInt("position", 0) : 0;
                 String status = "";
-
-                // Ánh xạ vị trí tab với trạng thái
                 switch (position) {
                     case 0:
                         status = "Chờ duyệt";
@@ -144,8 +138,6 @@ public class LichKhamActivity extends AppCompatActivity {
                 appointmentList = new ArrayList<>();
                 adapter = new AppointmentAdapter(appointmentList);
                 recyclerView.setAdapter(adapter);
-
-                // Đây là điểm quan trọng - tải dữ liệu theo trạng thái
                 loadAppointments(status);
 
                 return view;
@@ -162,7 +154,6 @@ public class LichKhamActivity extends AppCompatActivity {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             Appointment appointment = ds.getValue(Appointment.class);
                             if (appointment != null) {
-                                // Thêm ID để có thể thao tác với item sau này
                                 appointment.setId(ds.getKey());
                                 appointmentList.add(appointment);
                             }
@@ -170,7 +161,6 @@ public class LichKhamActivity extends AppCompatActivity {
 
                         adapter.notifyDataSetChanged();
 
-                        // Hiển thị thông báo nếu không có dữ liệu
                         if (appointmentList.isEmpty()) {
                             recyclerView.setVisibility(View.GONE);
                             tvEmpty.setVisibility(View.VISIBLE);

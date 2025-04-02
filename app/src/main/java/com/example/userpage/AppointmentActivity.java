@@ -58,7 +58,6 @@ public class AppointmentActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btn_submit);
         btnBack = findViewById(R.id.btn_back);
 
-        // Nhận dữ liệu từ Intent và điền thông tin bác sĩ
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String doctorName = extras.getString("doctor_name");
@@ -72,19 +71,13 @@ public class AppointmentActivity extends AppCompatActivity {
             tvPrice.setText("Giá khám: " + (price != null ? price + " VNĐ" : "Không xác định"));
         }
 
-        // Xử lý nút Back
         btnBack.setOnClickListener(v -> finish());
 
-        // DatePicker cho ngày sinh
         etPatientDob.setOnClickListener(v -> showDatePicker(etPatientDob));
 
-        // DatePicker cho ngày hẹn
         etAppointmentDate.setOnClickListener(v -> showDatePicker(etAppointmentDate));
-
-        // TimePicker cho giờ hẹn
         etAppointmentTime.setOnClickListener(v -> showTimePicker());
 
-        // Xử lý nút Submit
         btnSubmit.setOnClickListener(v -> submitAppointment());
     }
 
@@ -121,20 +114,17 @@ public class AppointmentActivity extends AppCompatActivity {
         String gender = rbMale.isChecked() ? "Nam" : rbFemale.isChecked() ? "Nữ" : "";
         String paymentMethod = rbCash.isChecked() ? "Thanh toán tại quầy" : "";
 
-        // Kiểm tra dữ liệu đầu vào
         if (patientName.isEmpty() || patientPhone.isEmpty() || patientDob.isEmpty() ||
                 symptoms.isEmpty() || appointmentDate.isEmpty() || appointmentTime.isEmpty() || gender.isEmpty()) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Kiểm tra định dạng số điện thoại (tùy chọn)
         if (!patientPhone.matches("\\d{10}")) {
             Toast.makeText(this, "Số điện thoại phải có 10 chữ số", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Lưu vào Firebase
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("appointments");
         String appointmentId = ref.push().getKey();
 
@@ -159,7 +149,7 @@ public class AppointmentActivity extends AppCompatActivity {
                     intent.putExtra("appointment_id", appointmentId); // Thêm ID để có thể tìm nhanh
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    finish(); // Đóng màn hình hiện tại
+                    finish();
                     Toast.makeText(this, "Đặt lịch thành công", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

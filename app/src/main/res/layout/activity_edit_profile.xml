@@ -182,9 +182,6 @@
                     android:layout_marginTop="4dp"
                     app:boxStrokeColor="@color/primary_color"
                     app:hintTextColor="@color/primary_color"
-                    app:endIconMode="custom"
-                    app:endIconDrawable="@drawable/ic_calendarr"
-                    app:endIconTint="@color/primary_color"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText

@@ -55,7 +55,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/round_image_background"
-                    android:src="@drawable/ic_deleted" />
+                    android:src="@drawable/ic_decrease_24" />
 
                 <TextView
                     android:id="@+id/quantityText"

@@ -48,19 +48,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        // Kiểm tra xem người dùng đã đăng nhập chưa
         if (isUserLoggedIn()) {
             navigateToMainScreen();
             return;
         }
-
-        // Khởi tạo Firebase Database và Authentication
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         emailToClientKeyRef = FirebaseDatabase.getInstance().getReference("emailToClientKey");
         mAuth = FirebaseAuth.getInstance();
 
-        // Ánh xạ các thành phần giao diện
         initializeViews();
         setupListeners();
     }
@@ -101,7 +96,6 @@ public class LoginActivity extends AppCompatActivity {
         String email = etUsername.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
-        // Reset errors
         etUsername.setError(null);
         etPassword.setError(null);
 
@@ -153,7 +147,6 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
                         if (firebaseUser != null) {
-                            // Tìm clientKey từ emailToClientKey
                             String emailKey = email.replace(".", ",");
                             emailToClientKeyRef.child(emailKey).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -161,7 +154,6 @@ public class LoginActivity extends AppCompatActivity {
                                     if (dataSnapshot.exists()) {
                                         String clientKey = dataSnapshot.getValue(String.class);
                                         if (clientKey != null) {
-                                            // Truy vấn dữ liệu người dùng từ users/clientX
                                             databaseReference.child(clientKey).addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot userSnapshot) {

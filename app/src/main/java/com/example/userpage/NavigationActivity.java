@@ -32,9 +32,8 @@ public class NavigationActivity extends AppCompatActivity {
             if (itemId == R.id.nav_home) {
                 selectedFragment = new TrangChuFragment();
             } else if (itemId == R.id.nav_community) {
-                selectedFragment = new ShoppingFragment(); // Use ShoppingFragment
+                selectedFragment = new ShoppingFragment();
             } else if (itemId == R.id.nav_notifications) {
-                // Chat with Doctors section
                 selectedFragment = new DoctorChatListFragment();
             } else if (itemId == R.id.nav_profile) {
                 SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);

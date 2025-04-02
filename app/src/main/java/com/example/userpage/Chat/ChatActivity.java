@@ -74,13 +74,10 @@ public class ChatActivity extends AppCompatActivity {
     private void sendMessage() {
         String messageText = messageInput.getText().toString().trim();
         if (!messageText.isEmpty()) {
-            // Add message to list
             String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
             Message newMessage = new Message(messageText, true, currentTime);
             messages.add(newMessage);
             saveMessages(doctorName);
-
-            // Update UI
             messageAdapter.notifyItemInserted(messages.size() - 1);
             messageRecyclerView.scrollToPosition(messages.size() - 1);
 

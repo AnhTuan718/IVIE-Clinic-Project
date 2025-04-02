@@ -48,7 +48,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            // Return the appropriate fragment for each tab position
             return new OrderTabFragment();
         }
 
